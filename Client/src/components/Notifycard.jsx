@@ -4,6 +4,7 @@ import { Link, Navigate } from "react-router-dom";
 import styled from "styled-components";
 import { format } from "timeago.js";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const Container = styled.div`
   width: ${(props) => props.type !== "sm" && "350px"};
@@ -98,7 +99,7 @@ const Notifycard = ({
         // fetchVideos()
         Navigate(`/video/${video._id}`);
       } catch (error) {
-        console.error("Error:", error);
+        toast.error("Error");
       }
     }
   };

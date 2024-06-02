@@ -172,11 +172,9 @@ const Upload = ({ setOpen,setNotificationOpen,setVideoCount }) => {
         // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
         const progress =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log(progress);
         urlType === "imgUrl"
           ? setImgPerc(Math.round(progress))
           : setVideoPerc(Math.round(progress));
-        console.log(imgPerc);
         switch (snapshot.state) {
           case "paused":
             console.log("Upload is paused");
@@ -240,8 +238,6 @@ const Upload = ({ setOpen,setNotificationOpen,setVideoCount }) => {
       if (video && inputs.title && inputs.desc && tags.length>0) {
     
   
-        console.log(inputs);
-        console.log(tags);
         const res = await axios.post("/videos/", { ...inputs, tags });
         if(res.data=="You are not authenticated!") toast.error("You are not authenticated! , login again!")
         setOpen(false);
@@ -253,7 +249,6 @@ const Upload = ({ setOpen,setNotificationOpen,setVideoCount }) => {
         const res2 = await axios.put(`/users/userInfo/${res.data._id}`);
         // setNotificationOpen(true);
         // setVideoCount(prevCount => prevCount + 1); 
-        console.log(res2.data);
 
 
       } else {

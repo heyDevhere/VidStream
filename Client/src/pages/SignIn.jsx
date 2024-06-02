@@ -89,10 +89,8 @@ const SignIn = () => {
     dispatch(loginStart());
     try {
       const res = await axios.post("/auth/signin", { name, password });
-      console.log(res.data);
       dispatch(loginSuccess(res.data));
       toast.success("Login successful!");
-      console.log(res.data);
       navigate("/")
 
       

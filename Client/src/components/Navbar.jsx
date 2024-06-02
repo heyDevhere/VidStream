@@ -158,13 +158,11 @@ const Navbar = () => {
       try {
         const notificationsResponse = await fetch("/notify/getNotifications");
         const notifications = await notificationsResponse.json();
-        console.log(notifications.length);
 
         const videoIds = notifications.map(
           (notification) => notification.videoId._id
         );
 
-        console.log(videoIds);
 
         const videoDetailsPromises = videoIds.map(videoId =>
           axios.get(`/videos/find/${videoId}`)
@@ -172,8 +170,6 @@ const Navbar = () => {
     
         const videoDetailsResponses = await Promise.all(videoDetailsPromises);
         const videoDetails = videoDetailsResponses.map(response => response.data);
-        console.log(videoDetails);
-        console.log("times");
         setVideoCount(videoIds.length);
 
       } catch (e) {

@@ -24,7 +24,6 @@ import Recommendation from "../components/Recommendation";
 import { toast } from "react-toastify";
 import { useRef } from "react";
 
-
 const Container = styled.div`
   display: flex;
   gap: 24px;
@@ -126,7 +125,6 @@ const Video = () => {
   const dispatch = useDispatch();
   const [selectedTrack, setSelectedTrack] = useState(null);
   const videoRef = useRef(null);
-
 
   const [channel, setChannel] = useState({});
 
@@ -372,28 +370,26 @@ const Video = () => {
     <Container>
       <Content>
         <VideoWrapper>
-          <VideoFrame src={currentVideo.videoUrl} controls   ref={videoRef}
-  onLoadedMetadata={() => {
-    const tracks = videoRef.current?.audioTracks;
-    if (tracks && tracks.length > 0) {
-      setSelectedTrack(tracks[0]);
-    }
-  }}/>
+          <VideoFrame
+            src={currentVideo.videoUrl}
+            controls
+            
+          />
 
-{videoRef.current?.audioTracks && videoRef.current.audioTracks.length > 1 && (
-            <div>
-              {videoRef.current.audioTracks.map((track, index) => (
-                <button
-                  key={index}
-                  onClick={() => handleTrackChange(index)}
-                  disabled={selectedTrack === track}
-                >
-                  {track.label}
-                </button>
-              ))}
-            </div>
-          )}
-          
+          {/* {videoRef.current?.audioTracks &&
+            videoRef.current.audioTracks.length > 1 && (
+              <div>
+                {videoRef.current.audioTracks.map((track, index) => (
+                  <button
+                    key={index}
+                    onClick={() => handleTrackChange(index)}
+                    disabled={selectedTrack === track}
+                  >
+                    {track.label}
+                  </button>
+                ))}
+              </div>
+            )} */}
         </VideoWrapper>
         <Title>{currentVideo.title}</Title>
         <Details>
