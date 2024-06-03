@@ -45,7 +45,7 @@ app.use((err, req, res, next) => {
 // });
 
 app.use(cors({
-     origin:["https://deploy-mern-1whq.vercel.app"],
+     origin:["https://vid-stream-frontend.vercel.app/"],
      methods:["POST","GET"],
      credentials:true
 }));
