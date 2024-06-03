@@ -44,6 +44,12 @@ app.use((err, req, res, next) => {
 //   next();
 // });
 
+app.use(cors({
+     origin:["https://deploy-mern-1whq.vercel.app"],
+     methods:["POST","GET"],
+     credentials:true
+}));
+
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
