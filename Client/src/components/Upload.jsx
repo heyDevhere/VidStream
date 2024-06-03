@@ -256,7 +256,6 @@ const Upload = ({ setOpen,setNotificationOpen,setVideoCount }) => {
         toast.error("Incomplete Information");
       }
     } catch (err) {
-      console.log("uff");
       console.log(err);
     }
   };
@@ -287,7 +286,7 @@ const Upload = ({ setOpen,setNotificationOpen,setVideoCount }) => {
         toast.error("Image dimensions exceed the allowed limit.");
         setOpen(false);
       } else {
-        console.log("Image dimensions are within the allowed limit.");
+        toast.success("Image dimensions are within the allowed limit.");
       }
     } catch (error) {
       console.error("Error getting image dimensions:", error);

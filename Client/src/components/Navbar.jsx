@@ -35,6 +35,15 @@ const User = styled.div`
   color: ${({ theme }) => theme.text};
 `;
 
+const Dev = styled.div`
+  cursor:pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+  color: ${({ theme }) => theme.text};
+`;
+
 const Notifiy = styled.div`
   display: flex;
   align-items: center;
@@ -102,7 +111,7 @@ const Button = styled.button`
 const Badge = styled.div`
   position: absolute;
   bottom: 28px;
-  right: ${({ currentUser }) => (currentUser ? "189px" : "145px")};
+  /* right: ${({ currentUser }) => (currentUser ? "199px" : "145px")}; */
   background-color: red;
   color: ${({ theme }) => theme.text};
   border-radius: 50%;
@@ -174,11 +183,12 @@ const Navbar = () => {
 
       } catch (e) {
         // toast.error("No Notifications available");
+        console.log(e);
       }
     };
     fetchVideos();
     }
-  }, []);
+  }, [location]);
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
@@ -193,8 +203,9 @@ const Navbar = () => {
 
   // This syntax executes the statement inside the function body.
   const userInfo = () => {
-    navigate("/video/userInfo");
+    navigate(`/video/userInfo/${currentUser._id}`);
   };
+
 
   const handleNot = async () => {
     if (currentUser) {
@@ -241,9 +252,10 @@ const Navbar = () => {
                 sx={{ cursor: "pointer", margin: "2px" }}
                 onClick={() => setOpen(true)}
               />
-
               <Avatar src={currentUser.img} onClick={userInfo} />
+               <Dev onClick={userInfo}>
               {currentUser.name}
+              </Dev>
             </User>
           ) : (
             <>

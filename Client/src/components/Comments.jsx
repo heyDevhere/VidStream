@@ -46,6 +46,7 @@ const Input = styled.input`
 
 const Comments = ({ videoId }) => {
   const { currentUser } = useSelector((state) => state.user);
+  const defaultImg = 'https://www.shutterstock.com/image-vector/user-profile-icon-vector-avatar-600nw-2247726673.jpg';
 
   const [newCommentText, setNewCommentText] = useState("");
   const [comments, setComments] = useState([]);
@@ -70,12 +71,12 @@ const Comments = ({ videoId }) => {
   };
 
   const handleAddComment = async () => {
+    if(currentUser){
     try {
       const res = await axios.post("/comments", {
         desc: newCommentText,
         videoId: videoId,
       });
-      console.log(res);
       const newComment = res.data;
       setComments([...comments, newComment]);
       toast.success("Comment Posted Successfully!")
@@ -83,6 +84,10 @@ const Comments = ({ videoId }) => {
     } catch (err) {
       console.error(err);
     }
+  }
+  else{
+    toast.error("Login First!");
+  }
   };
 
 
@@ -97,11 +102,12 @@ const Comments = ({ videoId }) => {
   }, [videoId]);
 
   //   //TODO: ADD NEW COMMENT FUNCTIONALITY
+  const imgUrl = currentUser?.img || defaultImg;
 
   return (
     <Container>
       <NewComment>
-        <Avatar src={currentUser?.img} />
+        <Avatar src={imgUrl} />
         <Input
           placeholder="Add a comment..."
           value={newCommentText}

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Card from "../components/Card";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 
 
 const Container = styled.div`
@@ -21,10 +22,11 @@ const Title = styled.h1`
 const UserInfo = ({type}) => {
   const [videos, setVideos] = useState([]);
   const { currentUser } = useSelector((state) => state.user);
+  const path = useLocation().pathname.split("/")[3];
 
   useEffect(() => {
     const fetchVideos = async () => {
-      const res = await axios.get(`/users/userInfo/`);
+      const res = await axios.get(`/users/get/userInfo/${path}`);
       setVideos(res.data);
     };
     fetchVideos();
@@ -32,7 +34,7 @@ const UserInfo = ({type}) => {
 
   return (
     <>
-      <Title>Videos uploaded by {currentUser.name}</Title>
+      {/* <Title>Videos uploaded by {currentUser.name}</Title> */}
     <Container>
       {videos && videos.map((video) => (
         <Card key={video._id} video={video}/>

@@ -75,13 +75,12 @@ const Comment = ({ comment,userId,onDelete }) => {
   const handleDelete = async () => {
     try {
       const res=await axios.delete(`/comments/${comment._id}`); // Call the delete API
-      console.log(res.data)
       toast.success("Comment Deleted Successfully!")
       onDelete(comment._id); // Call the callback function to update UI
 
     } catch (error) {
       toast.error("You can only delete your comment!");
-      console.error("Error deleting comment:", error);
+      console.log("Error deleting comment:", error);
     }
   };
 

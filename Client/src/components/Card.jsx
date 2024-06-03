@@ -89,8 +89,6 @@ const Card = ({ type,video}) => {
     if(currentUser){
       try {
         const res = await axios.put(`/users/${video._id}`);
-        console.log("Video added to history");
-        console.log(res.data);
       } catch (error) {
         console.error("Error:", error);
       }

@@ -181,17 +181,27 @@ export const getUsersWithVideos = async (req, res) => {
 
 export const getUploadedVideos = async (req, res, next) => {
   try {
-    const user = await User.findById(req.user.id);
+    const user = await User.findById(req.params.id);
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
     const Uploadedvideos = user.UploadedVideos;
 
+    if(Uploadedvideos.length>0){
     const list = await Promise.all(
-      Uploadedvideos.map(async (_id) => {
+     Uploadedvideos.map(async (_id) => {
         return await Video.find({
           _id: _id,
         });
-      })
+      }) 
     );
     res.status(200).json(list.flat());
+  }
+  else{
+    res.status(200).json([]);
+
+  }
 
   } catch (err) {
     next(err);

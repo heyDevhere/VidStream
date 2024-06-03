@@ -69,7 +69,7 @@ function App() {
                   <Route path="signin" element={<SignIn />} />
                   <Route path="video">
                     <Route path=":id" element={<Video />} />
-                    <Route path="userInfo" element={<UserInfo />} />
+                    <Route path="userInfo/:id" element={<UserInfo />} />
                   </Route>
                 </Route>
               </Routes>

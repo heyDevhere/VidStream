@@ -67,6 +67,13 @@ const Info = styled.div`
   color: ${({ theme }) => theme.textSoft};
 `;
 
+const scrollToTop = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+};
+
 const Notifycard = ({
   type,
   video,
@@ -88,18 +95,17 @@ const Notifycard = ({
   const handleClick = async () => {
     if (currentUser) {
       try {
+        scrollToTop();
         const res = await axios.put(`/users/${video._id}`);
-        console.log("Video added to history");
-        console.log(res.data);
         setVideoCount((prevCount) => prevCount - 1);
         const res2 = await axios.delete(`/notify/delete/${video._id}`);
-        console.log(res2.data);
 
         setNotificationOpen(false);
         // fetchVideos()
         Navigate(`/video/${video._id}`);
       } catch (error) {
-        toast.error("Error");
+        // toast.error("Error");
+        console.log(error);
       }
     }
   };

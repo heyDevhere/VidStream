@@ -24,7 +24,7 @@ router.put("/:id", verifyToken, update);
 router.put("/updatewatch/:id", verifyToken , updateWatchLater);
 
 router.put("/userInfo/:id", verifyToken , updateUploadVideos);
-router.get("/userInfo",verifyToken,getUploadedVideos);
+router.get("/get/userInfo/:id",getUploadedVideos);
 
 router.get("/getuserswithuvideos",getUsersWithVideos);
 

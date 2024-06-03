@@ -106,7 +106,6 @@ const SignIn = () => {
     // dispatch(loginStart());
     try {
       const res = await axios.post("/auth/signup", { name,email ,password });
-      console.log("no error")
       toast.success(res.data);
       // dispatch(loginSuccess(res.data));
       // console.log(res.data);
@@ -120,11 +119,9 @@ const SignIn = () => {
 
 
   const signInWithGoogle = async () => {
-    console.log("signInWithGoogle");
     dispatch(loginStart());
     signInWithPopup(auth, provider)
       .then((result) => {
-        console.log(result);
         axios
           .post("/auth/google", {
             name: result.user.displayName,
@@ -132,7 +129,6 @@ const SignIn = () => {
             img: result.user.photoURL,
           })    
           .then((res) => {
-            console.log(res);
             dispatch(loginSuccess(res.data));
             toast.success("Login successful!");
             navigate("/");

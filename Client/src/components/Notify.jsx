@@ -113,7 +113,8 @@ const Notify = ({ setVideoCount, setNotificationOpen }) => {
         setVideos(videoDetails);
         // setVideoCount(videoDetails.length)
       } catch (e) {
-        toast.error("No Notifications available");
+        // toast.error("No Notifications available");
+        console.log(e);
       }
     };
     fetchVideos();
@@ -135,7 +136,6 @@ const Notify = ({ setVideoCount, setNotificationOpen }) => {
 
       setNotify(NotifyIds);
 
-      console.log(videoIds);
 
       const videoDetailsPromises = videoIds.map(videoId =>
         axios.get(`/videos/find/${videoId}`)
@@ -143,7 +143,6 @@ const Notify = ({ setVideoCount, setNotificationOpen }) => {
   
       const videoDetailsResponses = await Promise.all(videoDetailsPromises);
       const videoDetails = videoDetailsResponses.map(response => response.data);
-      console.log(videoDetails);
 
       setVideos(videoDetails);
       // setVideoCount(videoDetails.length)

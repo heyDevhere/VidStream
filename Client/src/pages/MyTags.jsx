@@ -15,8 +15,6 @@ const MyTags = ({ type}) => {
   useEffect(() => {
     const fetchVideos = async () => {
       const res = await axios.get(`/videos/tags?tags=${type}`);
-      console.log("sdfsf");
-      console.log(res.data);
       setVideos(res.data);
     };
     fetchVideos();

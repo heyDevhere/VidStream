@@ -84,6 +84,7 @@ const Image = styled.img`
   width: 50px;
   height: 50px;
   border-radius: 50%;
+  cursor: pointer;
 `;
 
 const ChannelDetail = styled.div`
@@ -94,10 +95,13 @@ const ChannelDetail = styled.div`
 
 const ChannelName = styled.span`
   font-weight: 500;
+  cursor: pointer;
+
 `;
 
 const ChannelCounter = styled.span`
   margin-top: 5px;
+  cursor: pointer;
   margin-bottom: 20px;
   color: ${({ theme }) => theme.textSoft};
   font-size: 12px;
@@ -134,9 +138,7 @@ const Video = () => {
     if (currentUser) {
       try {
         const res = await axios.put(`/users/updatewatch/${path}`);
-        console.log("Video added to watch later");
-        console.log(res.data);
-        toast.success("Video Successfully added to watch later");
+        toast.success("Video Successfully added in Watch Later Section");
       } catch (error) {
         console.error("Error:", error);
       }
@@ -182,8 +184,17 @@ const Video = () => {
     }
   };
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+  
+
   const userInfo = () => {
-    navigate("/video/userInfo");
+    scrollToTop();
+    navigate(`/video/userInfo/${channel._id}`);
   };
 
   const handleShare = () => {
@@ -328,7 +339,7 @@ const Video = () => {
         dispatch(dislike(currentUser._id));
       }
     } else {
-      toast.error("login to dislike the video");
+      toast.error("login to dislike the video!");
     }
   };
 
@@ -446,8 +457,8 @@ const Video = () => {
           <ChannelInfo>
             <Image src={channel.img} onClick={userInfo} />
             <ChannelDetail>
-              <ChannelName>{channel.name}</ChannelName>
-              <ChannelCounter>{channel.subscribers} subscribers</ChannelCounter>
+              <ChannelName onClick={userInfo} >{channel.name}</ChannelName>
+              <ChannelCounter onClick={userInfo}>{channel.subscribers} subscribers</ChannelCounter>
               <Description>{currentVideo.desc}</Description>
             </ChannelDetail>
           </ChannelInfo>

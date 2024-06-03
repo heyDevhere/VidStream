@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import LamaTube from "../img/logo.png";
+import Tube from "../img/Capture-removebg-previews.png";
 import HomeIcon from "@mui/icons-material/Home";
 import ExploreOutlinedIcon from "@mui/icons-material/ExploreOutlined";
 import SubscriptionsOutlinedIcon from "@mui/icons-material/SubscriptionsOutlined";
@@ -108,33 +108,46 @@ const Title = styled.h2`
   margin-bottom: 20px;
 `;
 
+const scrollToTop = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+};
+
 const Menu = ({ darkMode, setDarkMode }) => {
   const { currentUser } = useSelector((state) => state.user);
 
   const handleSubscriptionClick = (e) => {
+   scrollToTop();
     if (!currentUser) {
       e.preventDefault();
-      toast.error("Please login first");
+      toast.error("Please login first !");
     }
+  };
+
+  const fordev = () => {
+    scrollToTop();
+    setDarkMode(!darkMode);
   };
 
   return (
     <Container>
       <Wrapper>
-        <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+        <Link to="/" style={{ textDecoration: "none", color: "inherit" }} >
           <Logo>
-            <Img src={LamaTube} />
+            <Img src={Tube} />
             VidStream
           </Logo>
         </Link>
-        <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+        <Link to="/" style={{ textDecoration: "none", color: "inherit" }} onClick={scrollToTop}>
           <Item>
             <HomeIcon />
             Home
           </Item>
           
         </Link>
-        <Link to="trends" style={{ textDecoration: "none", color: "inherit" }}>
+        <Link to="trends" style={{ textDecoration: "none", color: "inherit" }} onClick={scrollToTop}>
           <Item>
             <ExploreOutlinedIcon />
             Explore
@@ -175,7 +188,7 @@ const Menu = ({ darkMode, setDarkMode }) => {
         {!currentUser && (
           <>
             <Login>
-              <Link to="signin" style={{ textDecoration: "none" }}>
+              <Link to="signin" style={{ textDecoration: "none" }} onClick={scrollToTop}>
                 <Button>
                   <AccountCircleOutlinedIcon />
                   SIGN IN
@@ -187,38 +200,38 @@ const Menu = ({ darkMode, setDarkMode }) => {
         <Hr />
 
         {/* <Title>BEST OF LAMATUBE</Title> */}
-        <Item onClick={() => setDarkMode(!darkMode)}>
+        <Item onClick={fordev} >
           <SettingsBrightnessOutlinedIcon />
           {darkMode ? "Light" : "Dark"} Mode
         </Item>
-        <Link to="/music" style={{ textDecoration: "none" ,color: "inherit" }}>
+        <Link to="/music" style={{ textDecoration: "none" ,color: "inherit" }} onClick={scrollToTop}>
           <Item>
             <LibraryMusicOutlinedIcon />
             Music
           </Item>
         </Link>
-        <Link to="/sports" style={{ textDecoration: "none" ,color: "inherit" }}>
+        <Link to="/sports" style={{ textDecoration: "none" ,color: "inherit" }} onClick={scrollToTop}>
 
         <Item>
           <SportsBasketballOutlinedIcon />
           Sports
         </Item>
         </Link>
-        <Link to="/gaming" style={{ textDecoration: "none" ,color: "inherit" }}>
+        <Link to="/gaming" style={{ textDecoration: "none" ,color: "inherit" }} onClick={scrollToTop}>
 
         <Item>
           <SportsEsportsOutlinedIcon />
           Gaming
         </Item>
         </Link>
-        <Link to="/movies" style={{ textDecoration: "none" ,color: "inherit" }}>
+        <Link to="/movies" style={{ textDecoration: "none" ,color: "inherit" }} onClick={scrollToTop}>
 
         <Item>
           <MovieOutlinedIcon />
           Movies
         </Item>
         </Link>
-        <Link to="/news" style={{ textDecoration: "none" ,color: "inherit"}}>
+        <Link to="/news" style={{ textDecoration: "none" ,color: "inherit"}} onClick={scrollToTop}>
 
         <Item>
           <ArticleOutlinedIcon />
