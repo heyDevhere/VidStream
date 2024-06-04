@@ -19,7 +19,7 @@ const Search = () => {
 
   useEffect(() => {
     const fetchVideos = async () => {
-      const res = await axios.get(`https://vid-stream-back.vercel.app/api/videos/search${query}`);
+      const res = await axios.get(`videos/search${query}`);
       setVideos(res.data);
     };
     fetchVideos();

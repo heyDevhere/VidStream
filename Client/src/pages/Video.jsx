@@ -137,7 +137,7 @@ const Video = () => {
   const handleWatchLater = async () => {
     if (currentUser) {
       try {
-        const res = await axios.put(`https://vid-stream-back.vercel.app/api/users/updatewatch/${path}`);
+        const res = await axios.put(`users/updatewatch/${path}`);
         toast.success("Video Successfully added in Watch Later Section");
       } catch (error) {
         console.error("Error:", error);
@@ -162,9 +162,9 @@ const Video = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const videoRes = await axios.get(`https://vid-stream-back.vercel.app/api/videos/find/${path}`);
+        const videoRes = await axios.get(`videos/find/${path}`);
         const channelRes = await axios.get(
-          `https://vid-stream-back.vercel.app/api/users/find/${videoRes.data.userId}`
+          `users/find/${videoRes.data.userId}`
         );
         dispatch(fetchSuccess(videoRes.data));
         setChannel(channelRes.data);
@@ -334,7 +334,7 @@ const Video = () => {
 
   const handleDislike = async () => {
     if (currentUser) {
-      await axios.put(`https://vid-stream-back.vercel.app/api/users/dislike/${currentVideo._id}`);
+      await axios.put(`users/dislike/${currentVideo._id}`);
       if (currentUser._id) {
         dispatch(dislike(currentUser._id));
       }
@@ -349,10 +349,10 @@ const Video = () => {
         let updatedSubscribers = channel?.subscribers ?? 0;
 
         if (currentUser.subscribedUsers.includes(channel._id)) {
-          await axios.put(`https://vid-stream-back.vercel.app/api/users/unsub/${channel._id}`);
+          await axios.put(`users/unsub/${channel._id}`);
           updatedSubscribers -= 1;
         } else {
-          await axios.put(`https://vid-stream-back.vercel.app/api/users/sub/${channel._id}`);
+          await axios.put(`users/sub/${channel._id}`);
           updatedSubscribers += 1;
         }
 

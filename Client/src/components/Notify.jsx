@@ -104,7 +104,7 @@ const Notify = ({ setVideoCount, setNotificationOpen }) => {
 
 
         const videoDetailsPromises = videoIds.map(videoId =>
-          axios.get(`https://vid-stream-back.vercel.app/api/videos/find/${videoId}`)
+          axios.get(`videos/find/${videoId}`)
         );
     
         const videoDetailsResponses = await Promise.all(videoDetailsPromises);
@@ -138,7 +138,7 @@ const Notify = ({ setVideoCount, setNotificationOpen }) => {
 
 
       const videoDetailsPromises = videoIds.map(videoId =>
-        axios.get(`https://vid-stream-back.vercel.app/api/videos/find/${videoId}`)
+        axios.get(`videos/find/${videoId}`)
       );
   
       const videoDetailsResponses = await Promise.all(videoDetailsPromises);

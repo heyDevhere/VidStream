@@ -88,7 +88,7 @@ const SignIn = () => {
     e.preventDefault();
     dispatch(loginStart());
     try {
-      const res = await axios.post(`https://vid-stream-back.vercel.app/api/auth/signin`, { name, password });
+      const res = await axios.post(`auth/signin`, { name, password });
       dispatch(loginSuccess(res.data));
       toast.success("Login successful!");
       navigate("/")
@@ -105,7 +105,7 @@ const SignIn = () => {
     e.preventDefault();
     // dispatch(loginStart());
     try {
-      const res = await axios.post(`https://vid-stream-back.vercel.app/api/auth/signup`, { name,email ,password });
+      const res = await axios.post(`auth/signup`, { name,email ,password });
       toast.success(res.data);
       // dispatch(loginSuccess(res.data));
       // console.log(res.data);
@@ -123,7 +123,7 @@ const SignIn = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
         axios
-          .post(`https://vid-stream-back.vercel.app/api/auth/google`, {
+          .post(`auth/google`, {
             name: result.user.displayName,
             email: result.user.email,
             img: result.user.photoURL,

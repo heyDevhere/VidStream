@@ -66,7 +66,7 @@ const Comment = ({ comment,userId,onDelete }) => {
 
   useEffect(() => {
     const fetchComment = async () => {
-      const res = await axios.get(`https://vid-stream-back.vercel.app/api/users/find/${comment.userId}`);
+      const res = await axios.get(`users/find/${comment.userId}`);
       setChannel(res.data);
     };
     fetchComment();
@@ -74,7 +74,7 @@ const Comment = ({ comment,userId,onDelete }) => {
 
   const handleDelete = async () => {
     try {
-      const res=await axios.delete(`https://vid-stream-back.vercel.app/api/comments/${comment._id}`); // Call the delete API
+      const res=await axios.delete(`comments/${comment._id}`); // Call the delete API
       toast.success("Comment Deleted Successfully!")
       onDelete(comment._id); // Call the callback function to update UI
 

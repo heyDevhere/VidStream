@@ -12,7 +12,7 @@ const Recommendation = ({ tags , excludeId}) => {
 
   useEffect(() => {
     const fetchVideos = async () => {
-      const res = await axios.get(`https://vid-stream-back.vercel.app/api/videos/tags?tags=${tags}`);
+      const res = await axios.get(`videos/tags?tags=${tags}`);
       const filteredVideos = res.data.filter(video => video._id !== excludeId);
       setVideos(filteredVideos);
     };

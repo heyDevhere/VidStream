@@ -26,7 +26,7 @@ const UserInfo = ({type}) => {
 
   useEffect(() => {
     const fetchVideos = async () => {
-      const res = await axios.get(`https://vid-stream-back.vercel.app/api/users/get/userInfo/${path}`);
+      const res = await axios.get(`users/get/userInfo/${path}`);
       setVideos(res.data);
     };
     fetchVideos();
