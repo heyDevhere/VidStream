@@ -13,8 +13,8 @@ import { fileURLToPath } from "url";
 
 const corsOptions = {
   origin: 'https://video-8c3ca.firebaseapp.com/__/auth/handler?apiKey=AIzaSyBc77MlQNQbhU4v-HPVyrV5SE79qD3EsAU&appName=%5BDEFAULT%5D&authType=signInViaPopup&redirectUrl=http%3A%2F%2Flocalhost%3A3000%2Fsignin&v=10.12.0&eventId=3604638201&providerId=google.com&scopes=profile', 
- 
-};
+  
+};  
 
 
 
@@ -26,8 +26,8 @@ const connect = () => {
     console.log("Connected to DB");
   }).catch(err=>{
     throw err;
-  });
-};
+  });  
+};  
 
 app.use(express.json());
 
@@ -40,32 +40,32 @@ app.use((err, req, res, next) => {
     success: false,
     status,
     message,
-  });
-});
-
-// app.use((req, res, next) => {
-//   res.setHeader('Cross-Origin-Opener-Policy', 'same-origin-allow-popups');
-//   next();
-// });
-
-app.use(cors({
-     origin:["https://vid-stream-frontend.vercel.app"],
-     methods:["POST","GET","PUT","DELETE"],
-     credentials:true
-}));
-
-// app.use((req, res, next) => {
-//   res.header('Access-Control-Allow-Origin', '*');
-//   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-//   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-//   next();
-// });
+  });  
+});  
 
 app.use("/api/users", userRoutes);
 app.use("/api/videos", videoRoutes);
 app.use("/api/comments", commentRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/notify", notifyRoutes);
+
+// app.use((req, res, next) => {
+  //   res.setHeader('Cross-Origin-Opener-Policy', 'same-origin-allow-popups');  
+  //   next();
+// });
+
+app.use(cors({
+     origin:["https://vid-stream-frontend.vercel.app"],
+     methods:["POST","GET","PUT","DELETE"],
+     credentials:true
+}));     
+
+// app.use((req, res, next) => {
+//   res.header('Access-Control-Allow-Origin', '*');  
+//   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+//   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+//   next();
+// });
 
 
   
