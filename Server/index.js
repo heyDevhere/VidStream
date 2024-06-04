@@ -54,11 +54,13 @@ app.use("/api/notify", notifyRoutes);
   //   next();
 // });
 
-app.use(cors({
-     origin:["https://vid-stream-frontend.vercel.app"],
-     methods:["POST","GET","PUT","DELETE"],
-     credentials:true
-}));     
+app.use(
+  cors({
+    origin: "https://vid-stream-frontend.vercel.app",
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  })
+);
 
 // app.use((req, res, next) => {
 //   res.header('Access-Control-Allow-Origin', '*');  
