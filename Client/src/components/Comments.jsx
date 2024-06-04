@@ -59,7 +59,7 @@ const Comments = ({ videoId }) => {
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const res = await axios.get(`api/comments/${videoId}`);
+        const res = await axios.get(`/api/comments/${videoId}`);
         setComments(res.data);
       } catch (err) {}
     };
@@ -73,7 +73,7 @@ const Comments = ({ videoId }) => {
   const handleAddComment = async () => {
     if(currentUser){
     try {
-      const res = await axios.post("/comments", {
+      const res = await axios.post(`/comments`, {
         desc: newCommentText,
         videoId: videoId,
       });

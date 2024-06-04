@@ -238,7 +238,7 @@ const Upload = ({ setOpen,setNotificationOpen,setVideoCount }) => {
       if (video && inputs.title && inputs.desc && tags.length>0) {
     
   
-        const res = await axios.post("/videos/", { ...inputs, tags });
+        const res = await axios.post(`/videos/`, { ...inputs, tags });
         if(res.data=="You are not authenticated!") toast.error("You are not authenticated! , login again!")
         setOpen(false);
         res.status === 200 && navigate(`/video/${res.data._id}`);

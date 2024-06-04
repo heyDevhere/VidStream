@@ -8,11 +8,15 @@ import videoRoutes from "./routes/videos.js";
 import authRoutes from "./routes/auth.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import path from "path";
+import { fileURLToPath } from "url";
 
 const corsOptions = {
   origin: 'https://video-8c3ca.firebaseapp.com/__/auth/handler?apiKey=AIzaSyBc77MlQNQbhU4v-HPVyrV5SE79qD3EsAU&appName=%5BDEFAULT%5D&authType=signInViaPopup&redirectUrl=http%3A%2F%2Flocalhost%3A3000%2Fsignin&v=10.12.0&eventId=3604638201&providerId=google.com&scopes=profile', 
  
 };
+
+
 
 const app = express();
 Dotenv.config();
@@ -62,6 +66,10 @@ app.use("/api/videos", videoRoutes);
 app.use("/api/comments", commentRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/notify", notifyRoutes);
+
+
+  
+
 
 app.listen(8800,()=>{
   connect();
