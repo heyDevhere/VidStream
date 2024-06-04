@@ -15,7 +15,7 @@ const Home = ({type}) => {
 
   useEffect(() => {
     const fetchVideos = async () => {
-      const res = await axios.get(`/videos/${type}`);
+      const res = await axios.get(`https://vid-stream-frontend.vercel.app/api/videos/${type}`);
       console.log(res.data);
       setVideos(res.data);
     };

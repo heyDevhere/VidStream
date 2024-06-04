@@ -49,8 +49,8 @@ app.use((err, req, res, next) => {
 // });
 
 app.use(cors({
-     origin:["https://vid-stream-frontend.vercel.app/"],
-     methods:["POST","GET"],
+     origin:["https://vid-stream-frontend.vercel.app"],
+     methods:["POST","GET","PUT","DELETE"],
      credentials:true
 }));
 
