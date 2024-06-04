@@ -86,7 +86,7 @@ const Notifycard = ({
 
   useEffect(() => {
     const fetchChannel = async () => {
-      const res = await axios.get(`https://vid-stream-frontend.vercel.app/api/users/find/${video.userId}`);
+      const res = await axios.get(`https://vid-stream-back.vercel.app/api/users/find/${video.userId}`);
       setChannel(res.data);
     };
     fetchChannel();
@@ -96,9 +96,9 @@ const Notifycard = ({
     if (currentUser) {
       try {
         scrollToTop();
-        const res = await axios.put(`https://vid-stream-frontend.vercel.app/api/users/${video._id}`);
+        const res = await axios.put(`https://vid-stream-back.vercel.app/api/users/${video._id}`);
         setVideoCount((prevCount) => prevCount - 1);
-        const res2 = await axios.delete(`https://vid-stream-frontend.vercel.app/api/notify/delete/${video._id}`);
+        const res2 = await axios.delete(`https://vid-stream-back.vercel.app/api/notify/delete/${video._id}`);
 
         setNotificationOpen(false);
         // fetchVideos()

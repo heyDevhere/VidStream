@@ -14,7 +14,7 @@ const History = ({type}) => {
 
   useEffect(() => {
     const fetchVideos = async () => {
-      const res = await axios.get(`https://vid-stream-frontend.vercel.app/api/users/history`);
+      const res = await axios.get(`https://vid-stream-back.vercel.app/api/users/history`);
       setVideos(res.data);
     };
     fetchVideos();

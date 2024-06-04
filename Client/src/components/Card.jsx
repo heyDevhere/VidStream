@@ -76,7 +76,7 @@ const Card = ({ type,video}) => {
 
   useEffect(() => {
     const fetchChannel = async () => {
-      const res = await axios.get(`https://vid-stream-frontend.vercel.app/api/users/find/${video.userId}`);
+      const res = await axios.get(`https://vid-stream-back.vercel.app/api/users/find/${video.userId}`);
       setChannel(res.data);
      
     };
@@ -88,13 +88,13 @@ const Card = ({ type,video}) => {
 
     if(currentUser){
       try {
-        const res = await axios.put(`https://vid-stream-frontend.vercel.app/api/users/${video._id}`);
+        const res = await axios.put(`https://vid-stream-back.vercel.app/api/users/${video._id}`);
       } catch (error) {
         console.error("Error:", error);
       }
     }
     try {
-      const res2 = await axios.put(`https://vid-stream-frontend.vercel.app/api/videos/view/${video._id}`);
+      const res2 = await axios.put(`https://vid-stream-back.vercel.app/api/videos/view/${video._id}`);
     } catch (error) {
       console.log(error);
     }
