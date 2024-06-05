@@ -14,7 +14,7 @@ const History = ({type}) => {
 
   useEffect(() => {
     const fetchVideos = async () => {
-      const res = await axios.get(`users/history`);
+      const res = await axios.get(`/users/history`);
       setVideos(res.data);
     };
     fetchVideos();

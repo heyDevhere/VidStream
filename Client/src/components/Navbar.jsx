@@ -174,7 +174,7 @@ const Navbar = () => {
 
 
         const videoDetailsPromises = videoIds.map(videoId =>
-          axios.get(`videos/find/${videoId}`)
+          axios.get(`/videos/find/${videoId}`)
         );
     
         const videoDetailsResponses = await Promise.all(videoDetailsPromises);

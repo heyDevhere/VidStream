@@ -14,7 +14,7 @@ const History = ({type}) => {
 
   useEffect(() => {
     const fetchVideos = async () => {
-      const res = await axios.get(`users/watchLater/`);
+      const res = await axios.get(`/users/watchLater/`);
       setVideos(res.data);
     };
     fetchVideos();
