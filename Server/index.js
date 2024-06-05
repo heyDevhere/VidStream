@@ -78,9 +78,9 @@ app.listen(8800,()=>{
   console.log("listening on 8800");
 });
 
-app.use("/",(req,res)=>{
-   res.json({message:"hello"})
-});
+// app.use("/",(req,res)=>{
+//    res.json({message:"hello"})
+// });
 
 app.use("/api/videos/random",async (req,res)=>{
   try {
