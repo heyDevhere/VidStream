@@ -43,11 +43,7 @@ app.use((err, req, res, next) => {
   });  
 });  
 
-app.use("/api/users", userRoutes);
-app.use("/api/videos", videoRoutes);
-app.use("/api/comments", commentRoutes);
-app.use("/api/auth", authRoutes);
-app.use("/api/notify", notifyRoutes);
+
 
 app.use((req, res, next) => {
     res.setHeader('Cross-Origin-Opener-Policy', 'same-origin-allow-popups');  
@@ -83,3 +79,9 @@ app.listen(8800,()=>{
 app.use("/",(req,res)=>{
    res.json({message:"hello"})
 });
+
+app.use("/api/users", userRoutes);
+app.use("/api/videos", videoRoutes);
+app.use("/api/comments", commentRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/notify", notifyRoutes);
