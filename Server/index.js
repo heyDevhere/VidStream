@@ -10,6 +10,8 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
+import Video from "../Server/models/Video.js";
+
 
 const corsOptions = {
   origin: 'https://video-8c3ca.firebaseapp.com/__/auth/handler?apiKey=AIzaSyBc77MlQNQbhU4v-HPVyrV5SE79qD3EsAU&appName=%5BDEFAULT%5D&authType=signInViaPopup&redirectUrl=http%3A%2F%2Flocalhost%3A3000%2Fsignin&v=10.12.0&eventId=3604638201&providerId=google.com&scopes=profile', 
@@ -80,8 +82,20 @@ app.use("/",(req,res)=>{
    res.json({message:"hello"})
 });
 
-app.use("/api/users", userRoutes);
-app.use("/api/videos", videoRoutes);
-app.use("/api/comments", commentRoutes);
-app.use("/api/auth", authRoutes);
-app.use("/api/notify", notifyRoutes);
+app.use("/api/videos/random",async (req,res)=>{
+  try {
+    console.log("i am here");
+    console.log("i beg u to work");
+    const videos = await Video.aggregate([{ $sample: { size: 40 } }]);
+    res.status(200).json(videos);
+  } catch (err) {
+    next(err);
+  }
+});
+
+
+// app.use("/api/users", userRoutes);
+// app.use("/api/videos", videoRoutes);
+// app.use("/api/comments", commentRoutes);
+// app.use("/api/auth", authRoutes);
+// app.use("/api/notify", notifyRoutes);
