@@ -13,7 +13,7 @@ import { fileURLToPath } from "url";
 
 const corsOptions = {
   origin: [
-    "https://vid-stream-frontend.vercel.app",
+    "https://66632ace35256f245cc34705--loquacious-gnome-ee2e2c.netlify.app",
     "https://video-8c3ca.firebaseapp.com/__/auth/handler?apiKey=AIzaSyBc77MlQNQbhU4v-HPVyrV5SE79qD3EsAU&appName=%5BDEFAULT%5D&authType=signInViaPopup&redirectUrl=http%3A%2F%2Flocalhost%3A3000%2Fsignin&v=10.12.0&eventId=3604638201&providerId=google.com&scopes=profile"
   ],
   credentials: true,
