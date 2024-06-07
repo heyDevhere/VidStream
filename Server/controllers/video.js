@@ -117,8 +117,7 @@ export const addView = async (req, res, next) => {
 
 export const random = async (req, res, next) => {
   try {
-    console.log("i am here");
-    console.log("i beg u to work");
+    
     const videos = await Video.aggregate([{ $sample: { size: 40 } }]);
     res.status(200).json(videos);
   } catch (err) {
