@@ -48,7 +48,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-    }
+    },
+    "proxy":"https://vidstream-mfy7.onrender.com/api/$1"
 }
   
 

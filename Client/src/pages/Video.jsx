@@ -138,7 +138,7 @@ const Video = () => {
   const handleWatchLater = async () => {
     if (currentUser) {
       try {
-        const res = await axios.put(`https://vidstream-mfy7.onrender.com/api/users/updatewatch/${path}`);
+        const res = await axios.put(`/users/updatewatch/${path}`);
         toast.success("Video Successfully added in Watch Later Section");
       } catch (error) {
         console.error("Error:", error);
@@ -164,9 +164,9 @@ const Video = () => {
     const fetchData = async () => {
       console.log("devis");
       try {
-        const videoRes = await axios.get(`https://vidstream-mfy7.onrender.com/api/videos/find/${path}`);
+        const videoRes = await axios.get(`/videos/find/${path}`);
         const channelRes = await axios.get(
-          `https://vidstream-mfy7.onrender.com/api/users/find/${videoRes.data.userId}`
+          `/users/find/${videoRes.data.userId}`
         );
         console.log(videoRes.data);
         dispatch(fetchSuccess(videoRes.data));
@@ -179,7 +179,7 @@ const Video = () => {
 
   const handleLike = async () => {
     if (currentUser) {
-      await axios.put(`https://vidstream-mfy7.onrender.com/api/users/like/${video._id}`);
+      await axios.put(`/users/like/${video._id}`);
       if (currentUser._id) {
         dispatch(like(currentUser._id));
       }
@@ -338,7 +338,7 @@ const Video = () => {
 
   const handleDislike = async () => {
     if (currentUser) {
-      await axios.put(`https://vidstream-mfy7.onrender.com/api/users/dislike/${video._id}`);
+      await axios.put(`/users/dislike/${video._id}`);
       if (currentUser._id) {
         dispatch(dislike(currentUser._id));
       }
@@ -353,10 +353,10 @@ const Video = () => {
         let updatedSubscribers = channel?.subscribers ?? 0;
 
         if (currentUser.subscribedUsers.includes(channel._id)) {
-          await axios.put(`https://vidstream-mfy7.onrender.com/api/users/unsub/${channel._id}`);
+          await axios.put(`/users/unsub/${channel._id}`);
           updatedSubscribers -= 1;
         } else {
-          await axios.put(`https://vidstream-mfy7.onrender.com/api/users/sub/${channel._id}`);
+          await axios.put(`/users/sub/${channel._id}`);
           updatedSubscribers += 1;
         }
 
