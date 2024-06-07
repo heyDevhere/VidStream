@@ -11,6 +11,18 @@ import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
 
+app.use(
+  cors({
+    origin: "https://vid-stream-frontend.vercel.app",
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  })
+);
+
+
+
+
+
 const corsOptions = {
   origin: 'https://video-8c3ca.firebaseapp.com/__/auth/handler?apiKey=AIzaSyBc77MlQNQbhU4v-HPVyrV5SE79qD3EsAU&appName=%5BDEFAULT%5D&authType=signInViaPopup&redirectUrl=http%3A%2F%2Flocalhost%3A3000%2Fsignin&v=10.12.0&eventId=3604638201&providerId=google.com&scopes=profile', 
   
@@ -53,13 +65,6 @@ app.use((req, res, next) => {
 });
 
 
-app.use(
-  cors({
-    origin: "https://vid-stream-frontend.vercel.app",
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  })
-);
 
 app.listen(8800,()=>{
   connect();
