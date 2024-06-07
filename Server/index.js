@@ -6,6 +6,7 @@ import notifyRoutes from "./routes/notifyroute.js";
 import commentRoutes from "./routes/comments.js";
 import videoRoutes from "./routes/videos.js";
 import authRoutes from "./routes/auth.js";
+
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import path from "path";
