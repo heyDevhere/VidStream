@@ -52,6 +52,15 @@ app.use((req, res, next) => {
     next();
 });
 
+
+app.use(
+  cors({
+    origin: "https://vid-stream-frontend.vercel.app",
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  })
+);
+
 app.listen(8800,()=>{
   connect();
   console.log("listening on 8800");
