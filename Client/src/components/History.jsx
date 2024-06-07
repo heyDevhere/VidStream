@@ -14,7 +14,7 @@ const History = ({type}) => {
 
   useEffect(() => {
     const fetchVideos = async () => {
-      const res = await axios.get(`/users/history`);
+      const res = await axios.get(`https://vidstream-mfy7.onrender.com/api/users/history`);
       setVideos(res.data);
     };
     fetchVideos();
