@@ -59,7 +59,7 @@ const Comments = ({ videoId }) => {
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const res = await axios.get(`/comments/${videoId}`);
+        const res = await axios.get(`https://vidstream-mfy7.onrender.com/api/comments/${videoId}`);
         setComments(res.data);
       } catch (err) {}
     };
@@ -73,7 +73,7 @@ const Comments = ({ videoId }) => {
   const handleAddComment = async () => {
     if(currentUser){
     try {
-      const res = await axios.post(`/comments`, {
+      const res = await axios.post(`https://vidstream-mfy7.onrender.com/api/comments`, {
         desc: newCommentText,
         videoId: videoId,
       });
@@ -94,7 +94,7 @@ const Comments = ({ videoId }) => {
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const res = await axios.get(`/comments/${videoId}`);
+        const res = await axios.get(`https://vidstream-mfy7.onrender.com/api/comments/${videoId}`);
         setComments(res.data);
       } catch (err) {}
     };

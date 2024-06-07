@@ -86,7 +86,7 @@ const Notifycard = ({
 
   useEffect(() => {
     const fetchChannel = async () => {
-      const res = await axios.get(`/users/find/${video.userId}`);
+      const res = await axios.get(`https://vidstream-mfy7.onrender.com/api/users/find/${video.userId}`);
       setChannel(res.data);
     };
     fetchChannel();
@@ -96,9 +96,9 @@ const Notifycard = ({
     if (currentUser) {
       try {
         scrollToTop();
-        const res = await axios.put(`/users/${video._id}`);
+        const res = await axios.put(`https://vidstream-mfy7.onrender.com/api/users/${video._id}`);
         setVideoCount((prevCount) => prevCount - 1);
-        const res2 = await axios.delete(`/notify/delete/${video._id}`);
+        const res2 = await axios.delete(`https://vidstream-mfy7.onrender.com/api/notify/delete/${video._id}`);
 
         setNotificationOpen(false);
         // fetchVideos()
