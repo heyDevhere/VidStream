@@ -124,7 +124,7 @@ const Subscribe = styled.button`
 
 const Video = () => {
   const { currentUser } = useSelector((state) => state.user);
-  // const { video } = useSelector((state) => state.video);
+  const { currentVideo } = useSelector((state) => state.video);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [selectedTrack, setSelectedTrack] = useState(null);
@@ -386,7 +386,7 @@ const Video = () => {
       <Content>
         <VideoWrapper>
           <VideoFrame
-            src={video.videoUrl}
+            src={currentVideo.videoUrl}
             controls
             
           />
@@ -406,31 +406,31 @@ const Video = () => {
               </div>
             )} */}
         </VideoWrapper>
-        <Title>{video.title}</Title>
+        <Title>{currentVideo.title}</Title>
         <Details>
           <Info>
-            {video.views} views • {format(video.createdAt)}
+            {currentVideo.views} views • {format(currentVideo.createdAt)}
           </Info>
           <Buttons>
             <LikeButton>
               <Button onClick={handleLike}>
-                {video.likes?.includes(currentUser?._id) ? (
+                {currentVideo.likes?.includes(currentUser?._id) ? (
                   <ThumbUpIcon />
                 ) : (
                   <ThumbUpOutlinedIcon />
                 )}{" "}
-                {video.likes?.length}
+                {currentVideo.likes?.length}
               </Button>
             </LikeButton>
 
             <DislikeButton>
               <Button onClick={handleDislike}>
-                {video.dislikes?.includes(currentUser?._id) ? (
+                {currentVideo.dislikes?.includes(currentUser?._id) ? (
                   <ThumbDownIcon />
                 ) : (
                   <ThumbDownOffAltOutlinedIcon />
                 )}{" "}
-                {video.dislikes?.length}
+                {currentVideo.dislikes?.length}
               </Button>
             </DislikeButton>
             <Button>
@@ -463,7 +463,7 @@ const Video = () => {
             <ChannelDetail>
               <ChannelName onClick={userInfo} >{channel.name}</ChannelName>
               <ChannelCounter onClick={userInfo}>{channel.subscribers} subscribers</ChannelCounter>
-              <Description>{video.desc}</Description>
+              <Description>{currentVideo.desc}</Description>
             </ChannelDetail>
           </ChannelInfo>
 
@@ -474,9 +474,9 @@ const Video = () => {
           </Subscribe>
         </Channel>
         <Hr />
-        <Comments videoId={video._id} />
+        <Comments videoId={currentVideo._id} />
       </Content>
-      <Recommendation tags={video.tags} excludeId={video._id} />
+      <Recommendation tags={currentVideo.tags} excludeId={currentVideo._id} />
     </Container>
   );
 };
