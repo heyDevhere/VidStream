@@ -386,9 +386,8 @@ const Video = () => {
       <Content>
         <VideoWrapper>
           <VideoFrame
-            src={currentVideo.videoUrl}
+            src={video.videoUrl}
             controls
-            
           />
 
           {/* {videoRef.current?.audioTracks &&
