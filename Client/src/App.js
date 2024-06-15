@@ -14,35 +14,67 @@ import UserInfo from "./components/UserInfo";
 import Gaming from "./pages/MyTags";
 import MyTags from "./pages/MyTags";
 import Error from "./pages/Error";
+import BackToTop from "./components/BackToTop";
+import { useEffect } from "react";
 
 const Container = styled.div`
   display: flex;
   overflow-x: hidden; 
-  height:auto;
+  height:1000vh;
 
 
 `;
 
 const Main = styled.div`
   flex: 7;
-height  : auto ;
+  height  : auto ;
   background-color: ${({ theme }) => theme.bg};
 `;
 const Wrapper = styled.div`
   padding: 22px 36px 22px 25px;
- 
+  @media (max-width: 768px) {
+    /* padding: 22px 50px 22px 25px; */
+    margin-right:20px;
+    padding-right:20px;
+  }
 `;
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
+  const [menuOpen, setMenuOpen] = useState(true);
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 798) {
+        setMenuOpen(true);
+      } else {
+        setMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // Set initial state
+    handleResize();
+
+    // Clean up event listener on component unmount
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
 
   return (
     <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
       <Container>
+      <BackToTop />
+
         <BrowserRouter>
-          <Menu darkMode={darkMode} setDarkMode={setDarkMode} />
+          <Menu darkMode={darkMode} setDarkMode={setDarkMode} menuOpen={menuOpen} toggleMenu={toggleMenu}/>
           <Main>
-            <Navbar />
+            <Navbar toggleMenu={toggleMenu} menuOpen={menuOpen}/>
             <Wrapper>
               <Routes>
                 <Route path="/">
@@ -82,3 +114,5 @@ function App() {
 }
 
 export default App;
+
+

@@ -9,9 +9,19 @@ import { signInWithPopup } from "firebase/auth";
 import { Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useEffect } from "react";
+import app from "../firebase";
+
+
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from "firebase/storage";
 
 const Container = styled.div`
-  margin-top: 33px;
+  margin-top: 43px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -77,12 +87,68 @@ const SignIn = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  
+  const [img, setImg] = useState(undefined);
+  const [imgPerc, setImgPerc] = useState(0);
+  const [inputs, setInputs] = useState({});
+
 
   // ab when we want to use any action we use Dispatch()
 
+
+
+  useEffect(() => {
+    img && uploadFile(img, "imgUrl");
+  }, [img]);
+
+  const uploadFile = (file, urlType) => {
+    const storage = getStorage(app);
+    const fileName = new Date().getTime() + file.name;
+    const storageRef = ref(storage, fileName);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        // Observe state change events such as progress, pause, and resume
+        // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          setImgPerc(Math.round(progress))
+        switch (snapshot.state) {
+          case "paused":
+            console.log("Upload is paused");
+            break;
+          case "running":
+            console.log("Upload is running");
+            break;
+        }
+      },
+      (error) => {
+        // Handle unsuccessful uploads
+      },
+      () => {
+        // Handle successful uploads on complete
+        // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          setInputs((prev) => {
+            return {
+              ...prev,
+              [urlType]: downloadURL,
+            };
+          });
+        });
+      }
+    );
+  };
+
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const handleimage = async (e) => {
+    const selectedImg = e.target.files[0];
+    setImg(selectedImg);
+  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -91,11 +157,8 @@ const SignIn = () => {
       const res = await axios.post(`https://vidstream-mfy7.onrender.com/api/auth/signin`, { name, password });
       dispatch(loginSuccess(res.data));
       toast.success("Login successful!");
-      navigate("/")
-
-      
+      navigate("/");
     } catch (err) {
-
       toast.error("Wrong Credentials");
       dispatch(loginFailure());
     }
@@ -105,7 +168,7 @@ const SignIn = () => {
     e.preventDefault();
     // dispatch(loginStart());
     try {
-      const res = await axios.post(`https://vidstream-mfy7.onrender.com/api/auth/signup`, { name,email ,password });
+      const res = await axios.post(`https://vidstream-mfy7.onrender.com/api/auth/signup`, { name, email, password,inputs });
       toast.success(res.data);
       // dispatch(loginSuccess(res.data));
       // console.log(res.data);
@@ -117,7 +180,6 @@ const SignIn = () => {
     }
   };
 
-
   const signInWithGoogle = async () => {
     dispatch(loginStart());
     signInWithPopup(auth, provider)
@@ -127,7 +189,7 @@ const SignIn = () => {
             name: result.user.displayName,
             email: result.user.email,
             img: result.user.photoURL,
-          })    
+          })
           .then((res) => {
             dispatch(loginSuccess(res.data));
             toast.success("Login successful!");
@@ -139,7 +201,6 @@ const SignIn = () => {
         dispatch(loginFailure());
       });
   };
-
 
   return (
     <Container>
@@ -168,6 +229,17 @@ const SignIn = () => {
           placeholder="password"
           onChange={(e) => setPassword(e.target.value)}
         />
+        {imgPerc > 0 ? (
+          "Uploading:" + imgPerc + "%"
+        ) : (
+          <Input
+            type="file"
+            accept="image/*"
+            placeholder="User Icon"
+            // onChange={(e) => setImg(e.target.files[0])}
+            onChange={handleimage}
+          />
+        )}
         <Button onClick={handleSignup}>Sign up</Button>
       </Wrapper>
       <More>

@@ -30,3 +30,4 @@ const MyTags = ({ type}) => {
 };
 
 export default MyTags;
+

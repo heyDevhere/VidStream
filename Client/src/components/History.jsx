@@ -30,3 +30,6 @@ const History = ({type}) => {
 };
 
 export default History;
+
+
+

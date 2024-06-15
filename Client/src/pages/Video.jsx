@@ -27,6 +27,9 @@ import { useRef } from "react";
 const Container = styled.div`
   display: flex;
   gap: 24px;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 const Content = styled.div`
@@ -122,98 +125,8 @@ const Subscribe = styled.button`
   cursor: pointer;
 `;
 
-const Video = () => {
-  const { currentUser } = useSelector((state) => state.user);
-  const { currentVideo } = useSelector((state) => state.video);
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const [selectedTrack, setSelectedTrack] = useState(null);
-  const videoRef = useRef(null);
 
-  const [channel, setChannel] = useState({});
-  const [video, setVideo] = useState([]);
-
-  const path = useLocation().pathname.split("/")[2];
-
-  const handleWatchLater = async () => {
-    if (currentUser) {
-      try {
-        const res = await axios.put(`https://vidstream-mfy7.onrender.com/api/users/updatewatch/${path}`);
-        toast.success("Video Successfully added in Watch Later Section");
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    } else {
-      toast.error("Login First!");
-    }
-  };
-
-  const handleNotify = async () => {
-    if (!currentUser) toast.error("Login First!");
-    if (currentUser.subscribedUsers?.includes(channel._id)) {
-      try {
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    } else {
-      toast.error("Subscribe to get Notified!");
-    }
-  };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      console.log("devis");
-      try {
-        const videoRes = await axios.get(`https://vidstream-mfy7.onrender.com/api/videos/find/${path}`);
-        const channelRes = await axios.get(
-          `https://vidstream-mfy7.onrender.com/api/users/find/${videoRes.data.userId}`
-        );
-        console.log(videoRes.data);
-        dispatch(fetchSuccess(videoRes.data));
-        setVideo(videoRes.data);
-        setChannel(channelRes.data);
-      } catch (err) { console.log(err)}
-    };
-    fetchData();
-  }, [path, dispatch]);
-
-  const handleLike = async () => {
-    if (currentUser) {
-      await axios.put(`https://vidstream-mfy7.onrender.com/api/users/like/${video._id}`);
-      if (currentUser._id) {
-        dispatch(like(currentUser._id));
-      }
-    } else {
-      toast.error("login to like the video");
-    }
-  };
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
-  
-
-  const userInfo = () => {
-    scrollToTop();
-    navigate(`/video/userInfo/${channel._id}`);
-  };
-
-  const handleShare = () => {
-    const videoUrl = window.location.href;
-    navigator.clipboard
-      .writeText(videoUrl)
-      .then(() => {
-        toast.success("Link copied to clipboard");
-      })
-      .catch((err) => {
-        console.error("Failed to copy: ", err);
-      });
-  };
-
-  const VideoFrame = styled.video`
+const VideoFrame = styled.video`
     height: 70vh;
     width: 100%;
     object-fit: cover;
@@ -336,7 +249,102 @@ const Video = () => {
     }
   `;
 
+
+const Video = () => {
+  const { currentUser } = useSelector((state) => state.user);
+  const { currentVideo } = useSelector((state) => state.video);
+  const [showVideo, setShowVideo] = useState(true); // State to control video visibility
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [selectedTrack, setSelectedTrack] = useState(null);
+  const videoRef = useRef(null);
+
+  const [channel, setChannel] = useState({});
+  const [video, setVideo] = useState([]);
+
+  const path = useLocation().pathname.split("/")[2];
+
+  const handleWatchLater = async () => {
+    if (currentUser) {
+      try {
+        const res = await axios.put(`https://vidstream-mfy7.onrender.com/api/users/updatewatch/${path}`);
+        toast.success("Video Successfully added in Watch Later Section");
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    } else {
+      toast.error("Login First!");
+    }
+  };
+
+  const handleNotify = async () => {
+    if (!currentUser) toast.error("Login First!");
+    if (currentUser.subscribedUsers?.includes(channel._id)) {
+      try {
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    } else {
+      toast.error("Subscribe to get Notified!");
+    }
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      console.log("devis");
+      try {
+        const videoRes = await axios.get(`https://vidstream-mfy7.onrender.com/api/videos/find/${path}`);
+        const channelRes = await axios.get(
+          `https://vidstream-mfy7.onrender.com/api/users/find/${videoRes.data.userId}`
+        );
+        console.log(videoRes.data);
+        dispatch(fetchSuccess(videoRes.data));
+        setVideo(videoRes.data);
+        setChannel(channelRes.data);
+      } catch (err) { console.log(err)}
+    };
+    fetchData();
+  }, [path, dispatch]);
+
+  const handleLike = async () => {
+    if (currentUser) {
+      await axios.put(`https://vidstream-mfy7.onrender.com/api/users/like/${video._id}`);
+      if (currentUser._id) {
+        dispatch(like(currentUser._id));
+      }
+    } else {
+      toast.error("login to like the video");
+    }
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+  
+
+  const userInfo = () => {
+    scrollToTop();
+    navigate(`/video/userInfo/${channel._id}`);
+  };
+
+  const handleShare = () => {
+    const videoUrl = window.location.href;
+    navigator.clipboard
+      .writeText(videoUrl)
+      .then(() => {
+        toast.success("Link copied to clipboard");
+      })
+      .catch((err) => {
+        console.error("Failed to copy: ", err);
+      });
+  };
+
+  
   const handleDislike = async () => {
+    console.log("wow");
     if (currentUser) {
       await axios.put(`https://vidstream-mfy7.onrender.com/api/users/dislike/${video._id}`);
       if (currentUser._id) {
@@ -405,31 +413,31 @@ const Video = () => {
               </div>
             )} */}
         </VideoWrapper>
-        <Title>{currentVideo.title}</Title>
+        <Title>{video.title}</Title>
         <Details>
           <Info>
-            {currentVideo.views} views • {format(currentVideo.createdAt)}
+            {video.views} views • {format(video.createdAt)}
           </Info>
           <Buttons>
             <LikeButton>
               <Button onClick={handleLike}>
-                {currentVideo.likes?.includes(currentUser?._id) ? (
+                {video.likes?.includes(currentUser?._id) ? (
                   <ThumbUpIcon />
                 ) : (
                   <ThumbUpOutlinedIcon />
                 )}{" "}
-                {currentVideo.likes?.length}
+                {video.likes?.length}
               </Button>
             </LikeButton>
 
             <DislikeButton>
               <Button onClick={handleDislike}>
-                {currentVideo.dislikes?.includes(currentUser?._id) ? (
+                {video.dislikes?.includes(currentUser?._id) ? (
                   <ThumbDownIcon />
                 ) : (
                   <ThumbDownOffAltOutlinedIcon />
                 )}{" "}
-                {currentVideo.dislikes?.length}
+                {video.dislikes?.length}
               </Button>
             </DislikeButton>
             <Button>
@@ -462,7 +470,7 @@ const Video = () => {
             <ChannelDetail>
               <ChannelName onClick={userInfo} >{channel.name}</ChannelName>
               <ChannelCounter onClick={userInfo}>{channel.subscribers} subscribers</ChannelCounter>
-              <Description>{currentVideo.desc}</Description>
+              <Description>{video.desc}</Description>
             </ChannelDetail>
           </ChannelInfo>
 
@@ -473,9 +481,9 @@ const Video = () => {
           </Subscribe>
         </Channel>
         <Hr />
-        <Comments videoId={currentVideo._id} />
+        <Comments videoId={video._id} />
       </Content>
-      <Recommendation tags={currentVideo.tags} excludeId={currentVideo._id} />
+      <Recommendation tags={video.tags} excludeId={video._id} />
     </Container>
   );
 };

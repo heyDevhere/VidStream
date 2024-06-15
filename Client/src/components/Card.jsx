@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 const Container = styled.div`
   width: ${(props) => props.type !== "sm" && "350px"};
   margin-bottom: ${(props) => (props.type === "sm" ? "10px" : "45px")};
+  margin-top: auto;
   cursor: pointer;
   margin-right:2px;
   display: ${(props) => props.type === "sm" && "flex"};
@@ -125,3 +126,5 @@ const Card = ({ type,video}) => {
 };
 
 export default Card;
+
+

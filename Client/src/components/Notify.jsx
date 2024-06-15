@@ -22,6 +22,11 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   z-index: 2000;
+  @media (max-width: 768px) {
+    align-items: flex-end;
+    justify-content: flex-end;
+
+  }
 `;
 
 const Scrollbar = styled.div``;
@@ -48,6 +53,11 @@ const Wrapper = styled.div`
   border-radius: 8px;
   overflow-x: hidden; /* Enable scrolling inside the modal if content overflows */
 
+
+  @media (max-width: 768px) {
+    right:10px;
+
+  }
   /* Custom scrollbar styles */
   &::-webkit-scrollbar {
     width: 10px; /* Width of the vertical scrollbar */
@@ -197,3 +207,5 @@ const Notify = ({ setVideoCount, setNotificationOpen }) => {
 };
 
 export default Notify;
+
+

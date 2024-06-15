@@ -18,20 +18,35 @@ import FlagOutlinedIcon from "@mui/icons-material/FlagOutlined";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import SettingsBrightnessOutlinedIcon from "@mui/icons-material/SettingsBrightnessOutlined";
 import WatchLaterOutlinedIcon from "@mui/icons-material/WatchLaterOutlined";
-
+import MenuIcon from "@mui/icons-material/Menu";
+import { logout } from "../redux/userSlice";
+import { Navigate, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+
 import { toast } from "react-toastify";
 
 const Container = styled.div`
   flex: 2;
   background-color: ${({ theme }) => theme.bgLighter};
   color: ${({ theme }) => theme.text};
+
   font-size: 14px;
   position: sticky;
   top: 0;
   overflow-y: auto;
+  overflow-x: auto;
   height: 1000vh;
+  display: ${({ menuOpen }) => (menuOpen ? "block" : "none")};
+  @media (max-width: 768px) {
+    position:fixed;
+    width: 100%;
+    left: ${({ menuOpen }) => (menuOpen ? "0" : "100%")};
+    transition: left 0.3s ease; /* Smooth transition for sliding effect */
+    z-index: 1000;
+  }
+
   ::-webkit-scrollbar {
     width: 10px;
   }
@@ -115,8 +130,27 @@ const scrollToTop = () => {
   });
 };
 
-const Menu = ({ darkMode, setDarkMode }) => {
+
+
+
+const Menu = ({ darkMode, setDarkMode ,menuOpen,toggleMenu }) => {
   const { currentUser } = useSelector((state) => state.user);
+  const dispatch=useDispatch();
+  const navigate=useNavigate();
+
+  const handleClick = () => {
+    if (window.innerWidth <= 768) { 
+      toggleMenu(); 
+    }
+  };
+
+  const handleLogout = () => {
+    if (window.innerWidth <= 768) { 
+      toggleMenu(); 
+    }
+    dispatch(logout());
+    navigate("/");
+  };
 
   const handleSubscriptionClick = (e) => {
    scrollToTop();
@@ -129,10 +163,11 @@ const Menu = ({ darkMode, setDarkMode }) => {
   const fordev = () => {
     scrollToTop();
     setDarkMode(!darkMode);
+    handleClick();
   };
 
   return (
-    <Container>
+    <Container menuOpen={menuOpen}>
       <Wrapper>
         <Link to="/" style={{ textDecoration: "none", color: "inherit" }} >
           <Logo>
@@ -141,14 +176,14 @@ const Menu = ({ darkMode, setDarkMode }) => {
           </Logo>
         </Link>
         <Link to="/" style={{ textDecoration: "none", color: "inherit" }} onClick={scrollToTop}>
-          <Item>
+          <Item onClick={handleClick}>
             <HomeIcon />
             Home
           </Item>
           
         </Link>
         <Link to="trends" style={{ textDecoration: "none", color: "inherit" }} onClick={scrollToTop}>
-          <Item>
+          <Item onClick={handleClick}>
             <ExploreOutlinedIcon />
             Explore
           </Item>
@@ -158,7 +193,7 @@ const Menu = ({ darkMode, setDarkMode }) => {
           style={{ textDecoration: "none", color: "inherit" }}
           onClick={handleSubscriptionClick}
         >
-          <Item>
+          <Item onClick={handleClick}>
             <SubscriptionsOutlinedIcon />
             Subscriptions
           </Item>
@@ -168,7 +203,7 @@ const Menu = ({ darkMode, setDarkMode }) => {
           style={{ textDecoration: "none", color: "inherit" }}
           onClick={handleSubscriptionClick}
         >
-          <Item>
+          <Item onClick={handleClick}>
             <HistoryOutlinedIcon />
             History
           </Item>
@@ -179,24 +214,34 @@ const Menu = ({ darkMode, setDarkMode }) => {
           style={{ textDecoration: "none", color: "inherit" }}
           onClick={handleSubscriptionClick}
         >
-          <Item>
+          <Item onClick={handleClick}>
             <WatchLaterOutlinedIcon />
             Watch Later
           </Item>
         </Link>
 
-        {!currentUser && (
+        {!currentUser ? (
           <>
             <Login>
               <Link to="signin" style={{ textDecoration: "none" }} onClick={scrollToTop}>
-                <Button>
+                <Button onClick={handleClick}>
                   <AccountCircleOutlinedIcon />
                   SIGN IN
                 </Button>
               </Link>
             </Login>
           </>
-        )}
+        ) : (
+            <Login>
+              <Link to="signin" style={{ textDecoration: "none" }} onClick={scrollToTop}>
+                <Button onClick={handleLogout}>
+                  <AccountCircleOutlinedIcon />
+                  SIGN OUT
+                </Button>
+              </Link>
+            </Login>
+          )
+        }
         <Hr />
 
         {/* <Title>BEST OF LAMATUBE</Title> */}
@@ -205,35 +250,35 @@ const Menu = ({ darkMode, setDarkMode }) => {
           {darkMode ? "Light" : "Dark"} Mode
         </Item>
         <Link to="/music" style={{ textDecoration: "none" ,color: "inherit" }} onClick={scrollToTop}>
-          <Item>
+          <Item onClick={handleClick}>
             <LibraryMusicOutlinedIcon />
             Music
           </Item>
         </Link>
         <Link to="/sports" style={{ textDecoration: "none" ,color: "inherit" }} onClick={scrollToTop}>
 
-        <Item>
+        <Item onClick={handleClick}>
           <SportsBasketballOutlinedIcon />
           Sports
         </Item>
         </Link>
         <Link to="/gaming" style={{ textDecoration: "none" ,color: "inherit" }} onClick={scrollToTop}>
 
-        <Item>
+        <Item onClick={handleClick}>
           <SportsEsportsOutlinedIcon />
           Gaming
         </Item>
         </Link>
         <Link to="/movies" style={{ textDecoration: "none" ,color: "inherit" }} onClick={scrollToTop}>
 
-        <Item>
+        <Item onClick={handleClick}>
           <MovieOutlinedIcon />
           Movies
         </Item>
         </Link>
         <Link to="/news" style={{ textDecoration: "none" ,color: "inherit"}} onClick={scrollToTop}>
 
-        <Item>
+        <Item onClick={handleClick}>
           <ArticleOutlinedIcon />
           News
         </Item>
@@ -266,3 +311,5 @@ const Menu = ({ darkMode, setDarkMode }) => {
 };
 
 export default Menu;
+
+

@@ -34,3 +34,6 @@ const Home = ({type}) => {
 };
 
 export default Home;
+
+
+
