@@ -9,7 +9,7 @@ export const signup = async (req, res,next) => {
   try {
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(req.body.password, salt);
-    const newUser = new User({ ...req.body, password: hash });
+    const newUser = new User({ ...req.body, password: hash , img : req.body.inputs.imgUrl });
     await newUser.save();
     res.status(200).send("User has been Registered!");
 
@@ -36,7 +36,9 @@ export const signin = async (req, res, next) => {
 
 // secure !! other 2rd party will not use our cookie
     res.cookie("access_token",token,{
-      httpOnly:true
+      httpOnly:true,
+      secure: process.env.NODE_ENV === 'production', // Set secure to true in production
+  sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax' // Adjust SameSite as needed
     }).status(200).json(others)
 
 

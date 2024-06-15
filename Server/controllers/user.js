@@ -49,6 +49,7 @@ export const updateUploadVideos = async (req, res, next) => {
 export const updateWatchLater = async (req, res, next) => {
 
   try {
+    console.log(req.data);
     const video = await Video.findById(req.params.id);
     const userId = req.user.id;
     if (!video) return next(createError(404, "Video not found!"));
@@ -255,6 +256,7 @@ export const unsubscribe = async (req, res, next) => {
 
 
 export const like = async (req, res, next) => {
+  console.log("wowowow");
   const id = req.user.id;
   const videoId = req.params.videoId;
   try {
