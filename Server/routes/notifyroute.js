@@ -1,6 +1,6 @@
 import express from "express";
 import { getUserNotifications , deleteNotification } from "../controllers/notify.js";
-import {verifyToken} from "../verifyToken.js"
+import {verifyToken} from "../verifyToken.mjs"
 const router = express.Router();
 
 router.get("/getNotifications",verifyToken, getUserNotifications);

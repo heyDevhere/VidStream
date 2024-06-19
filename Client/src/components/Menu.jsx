@@ -33,36 +33,55 @@ const Container = styled.div`
   color: ${({ theme }) => theme.text};
 
   font-size: 14px;
-  position: sticky;
-  top: 0;
+  position: fixed;
   overflow-y: auto;
   overflow-x: auto;
-  height: 1000vh;
-  display: ${({ menuOpen }) => (menuOpen ? "block" : "none")};
+  z-index: 1000;
+  width: 200px;
+  height: 100vh;
+  /* display: ${({ menuOpen }) => (menuOpen ? "block" : "none")}; */
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform: ${({ menuOpen }) =>
+    menuOpen ? "translateX(0)" : "translateX(-100%)"};
+  opacity: ${({ menuOpen }) => (menuOpen ? 1 : 0)};
+  pointer-events: ${({ menuOpen }) => (menuOpen ? "auto" : "none")};
   @media (max-width: 768px) {
-    position:fixed;
+    position: fixed;
     width: 100%;
     left: ${({ menuOpen }) => (menuOpen ? "0" : "100%")};
-    transition: left 0.3s ease; /* Smooth transition for sliding effect */
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform: ${({ menuOpen }) =>
+      menuOpen ? "translateX(0)" : "translateX(-100%)"};
+    opacity: ${({ menuOpen }) => (menuOpen ? 1 : 0)};
+    pointer-events: ${({ menuOpen }) => (menuOpen ? "auto" : "none")};
     z-index: 1000;
   }
 
   ::-webkit-scrollbar {
-    width: 10px;
+    cursor: pointer;
+
+    width: 8px;
   }
 
   /* Track */
   ::-webkit-scrollbar-track {
+    cursor: pointer;
+
     background: #f1f1f1;
   }
 
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: #888;
+    cursor: pointer;
+
+    /* background: #888; */
+    background: ${({ theme }) => theme.soft};
   }
 
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
+    cursor: pointer;
+
     background: #555;
   }
 `;
@@ -130,30 +149,27 @@ const scrollToTop = () => {
   });
 };
 
-
-
-
-const Menu = ({ darkMode, setDarkMode ,menuOpen,toggleMenu }) => {
+const Menu = ({ darkMode, setDarkMode, menuOpen, toggleMenu }) => {
   const { currentUser } = useSelector((state) => state.user);
-  const dispatch=useDispatch();
-  const navigate=useNavigate();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleClick = () => {
-    if (window.innerWidth <= 768) { 
-      toggleMenu(); 
+    if (window.innerWidth <= 768) {
+      toggleMenu();
     }
   };
 
   const handleLogout = () => {
-    if (window.innerWidth <= 768) { 
-      toggleMenu(); 
+    if (window.innerWidth <= 768) {
+      toggleMenu();
     }
     dispatch(logout());
     navigate("/");
   };
 
   const handleSubscriptionClick = (e) => {
-   scrollToTop();
+    scrollToTop();
     if (!currentUser) {
       e.preventDefault();
       toast.error("Please login first !");
@@ -169,20 +185,27 @@ const Menu = ({ darkMode, setDarkMode ,menuOpen,toggleMenu }) => {
   return (
     <Container menuOpen={menuOpen}>
       <Wrapper>
-        <Link to="/" style={{ textDecoration: "none", color: "inherit" }} >
+        {/* <Link to="/" style={{ textDecoration: "none", color: "inherit" }} >
           <Logo>
             <Img src={Tube} />
             VidStream
           </Logo>
-        </Link>
-        <Link to="/" style={{ textDecoration: "none", color: "inherit" }} onClick={scrollToTop}>
+        </Link> */}
+        <Link
+          to="/"
+          style={{ textDecoration: "none", color: "inherit" }}
+          onClick={scrollToTop}
+        >
           <Item onClick={handleClick}>
             <HomeIcon />
             Home
           </Item>
-          
         </Link>
-        <Link to="trends" style={{ textDecoration: "none", color: "inherit" }} onClick={scrollToTop}>
+        <Link
+          to="trends"
+          style={{ textDecoration: "none", color: "inherit" }}
+          onClick={scrollToTop}
+        >
           <Item onClick={handleClick}>
             <ExploreOutlinedIcon />
             Explore
@@ -223,7 +246,11 @@ const Menu = ({ darkMode, setDarkMode ,menuOpen,toggleMenu }) => {
         {!currentUser ? (
           <>
             <Login>
-              <Link to="signin" style={{ textDecoration: "none" }} onClick={scrollToTop}>
+              <Link
+                to="signin"
+                style={{ textDecoration: "none" }}
+                onClick={scrollToTop}
+              >
                 <Button onClick={handleClick}>
                   <AccountCircleOutlinedIcon />
                   SIGN IN
@@ -232,56 +259,75 @@ const Menu = ({ darkMode, setDarkMode ,menuOpen,toggleMenu }) => {
             </Login>
           </>
         ) : (
-            <Login>
-              <Link to="signin" style={{ textDecoration: "none" }} onClick={scrollToTop}>
-                <Button onClick={handleLogout}>
-                  <AccountCircleOutlinedIcon />
-                  SIGN OUT
-                </Button>
-              </Link>
-            </Login>
-          )
-        }
+          <Login>
+            <Link
+              to="signin"
+              style={{ textDecoration: "none" }}
+              onClick={scrollToTop}
+            >
+              <Button onClick={handleLogout}>
+                <AccountCircleOutlinedIcon />
+                SIGN OUT
+              </Button>
+            </Link>
+          </Login>
+        )}
         <Hr />
 
         {/* <Title>BEST OF LAMATUBE</Title> */}
-        <Item onClick={fordev} >
+        <Item onClick={fordev}>
           <SettingsBrightnessOutlinedIcon />
           {darkMode ? "Light" : "Dark"} Mode
         </Item>
-        <Link to="/music" style={{ textDecoration: "none" ,color: "inherit" }} onClick={scrollToTop}>
+        <Link
+          to="/music"
+          style={{ textDecoration: "none", color: "inherit" }}
+          onClick={scrollToTop}
+        >
           <Item onClick={handleClick}>
             <LibraryMusicOutlinedIcon />
             Music
           </Item>
         </Link>
-        <Link to="/sports" style={{ textDecoration: "none" ,color: "inherit" }} onClick={scrollToTop}>
-
-        <Item onClick={handleClick}>
-          <SportsBasketballOutlinedIcon />
-          Sports
-        </Item>
+        <Link
+          to="/sports"
+          style={{ textDecoration: "none", color: "inherit" }}
+          onClick={scrollToTop}
+        >
+          <Item onClick={handleClick}>
+            <SportsBasketballOutlinedIcon />
+            Sports
+          </Item>
         </Link>
-        <Link to="/gaming" style={{ textDecoration: "none" ,color: "inherit" }} onClick={scrollToTop}>
-
-        <Item onClick={handleClick}>
-          <SportsEsportsOutlinedIcon />
-          Gaming
-        </Item>
+        <Link
+          to="/gaming"
+          style={{ textDecoration: "none", color: "inherit" }}
+          onClick={scrollToTop}
+        >
+          <Item onClick={handleClick}>
+            <SportsEsportsOutlinedIcon />
+            Gaming
+          </Item>
         </Link>
-        <Link to="/movies" style={{ textDecoration: "none" ,color: "inherit" }} onClick={scrollToTop}>
-
-        <Item onClick={handleClick}>
-          <MovieOutlinedIcon />
-          Movies
-        </Item>
+        <Link
+          to="/movies"
+          style={{ textDecoration: "none", color: "inherit" }}
+          onClick={scrollToTop}
+        >
+          <Item onClick={handleClick}>
+            <MovieOutlinedIcon />
+            Movies
+          </Item>
         </Link>
-        <Link to="/news" style={{ textDecoration: "none" ,color: "inherit"}} onClick={scrollToTop}>
-
-        <Item onClick={handleClick}>
-          <ArticleOutlinedIcon />
-          News
-        </Item>
+        <Link
+          to="/news"
+          style={{ textDecoration: "none", color: "inherit" }}
+          onClick={scrollToTop}
+        >
+          <Item onClick={handleClick}>
+            <ArticleOutlinedIcon />
+            News
+          </Item>
         </Link>
 
         <Item>
@@ -311,5 +357,3 @@ const Menu = ({ darkMode, setDarkMode ,menuOpen,toggleMenu }) => {
 };
 
 export default Menu;
-
-

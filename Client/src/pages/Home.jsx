@@ -7,6 +7,11 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+  @media (max-width: 768px) {
+    padding-right: 34px;
+    flex-direction: column;
+   
+  }
 `;
 
 
@@ -14,10 +19,10 @@ const Home = ({type}) => {
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
-    console.log("dev");
     const fetchVideos = async () => {
-      const res = await axios.get(`https://vidstream-mfy7.onrender.com/api/videos/${type}`);
-      console.log(res.data);
+      const res = await axios.get(`http://localhost:8800/api/videos/${type}`,{
+        withCredentials: true // Include credentials in axios
+      });
       setVideos(res.data);
     };
     fetchVideos();

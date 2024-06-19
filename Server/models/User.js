@@ -15,6 +15,7 @@ const UserSchema = new mongoose.Schema({
         type: String,
         // required: true,
     },
+ 
     img: {
         type: String,
         default:"https://www.shutterstock.com/image-vector/user-profile-icon-vector-avatar-600nw-2247726673.jpg"
@@ -52,7 +53,15 @@ const UserSchema = new mongoose.Schema({
         type: [mongoose.Schema.Types.ObjectId],
         ref: 'Video',
         default: [],
-    }
+    },
+
+    tokens:[
+        {
+            token:{
+                type: String,
+            }
+        }
+    ]
 
 }, { timestamps: true });
 

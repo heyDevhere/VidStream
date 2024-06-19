@@ -125,10 +125,11 @@ const SearchIconWrapper = styled(SearchIcon)`
 //   font-size: 12px;
 // `;
 const Container = styled.div`
-  position: sticky;
+  position: fixed;
   top: 0;
   background-color: ${({ theme }) => theme.bgLighter};
   height: 56px;
+  width: 100vw;
   z-index: 1000;
   /* width: ${({ menuOpen }) =>
     menuOpen ? "" : "100vw"}; Adjust width based on menuOpen state */
@@ -158,9 +159,9 @@ const Search = styled.div`
   margin: 0 10px;
 
   @media (max-width: 768px) {
-    margin: 10px 20px;
-    width: 80%;
-    justify-content: center;
+    margin: 10px 10px 10px 20px;
+    width: 100%;
+    /* justify-content: center; */
   }
 `;
 
@@ -175,7 +176,7 @@ const Input = styled.input`
   border: 1px solid ${({ theme }) => theme.text};
 
   @media (max-width: 768px) {
-    width: 70%;
+    width: 80px;
   }
 `;
 
@@ -282,8 +283,14 @@ const Logo = styled.div`
   cursor: pointer;
   margin-left: 15px;
   font-weight: bold;
+  color: ${({ theme }) => theme.text};
+
+
   @media (max-width: 768px) {
     margin-left: 29px;
+    .logo-text {
+      display: none; /* Hide the text on small screens */
+    }
   }
 `;
 
@@ -345,12 +352,11 @@ const Navbar = ({ toggleMenu, menuOpen }) => {
     if (currentUser) {
       const fetchVideos = async () => {
         try {
-          const notificationsResponse = await fetch(
-            "/notify/getNotifications",
-            {
-              credentials: "include",
-            }
-          );
+          const notificationsResponse = await axios.get(
+            "http://localhost:8800/api/notify/getNotifications",{
+              withCredentials: true 
+            });
+          if(!notificationsResponse.ok) console.log("shit");
           const notifications = await notificationsResponse.json();
 
           const videoIds = notifications.map(
@@ -359,8 +365,9 @@ const Navbar = ({ toggleMenu, menuOpen }) => {
 
           const videoDetailsPromises = videoIds.map((videoId) =>
             axios.get(
-              `https://vidstream-mfy7.onrender.com/api/videos/find/${videoId}`
-            )
+              `http://localhost:8800/api/videos/find/${videoId}`,{
+                withCredentials: true 
+              })
           );
 
           const videoDetailsResponses = await Promise.all(videoDetailsPromises);
@@ -408,6 +415,7 @@ const Navbar = ({ toggleMenu, menuOpen }) => {
     color: ${({ theme }) => theme.text};
     cursor: pointer;
     left: ${({ menuOpen }) => (menuOpen ? "5px" : "5px")};
+    transition: left 0.3s ease;
 
     @media (max-width: 768px) {
       left: 10px;
@@ -418,13 +426,14 @@ const Navbar = ({ toggleMenu, menuOpen }) => {
     <>
       <Container>
         <Wrapper>
-          {!menuOpen && (
+         
             <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
               <Logo>
                 <Img src={Tube} />
-              </Logo>
+                <span className="logo-text">VidStream</span>
+                </Logo>
             </Link>
-          )}
+          
           <MenuIconWrapper onClick={toggleMenu} />
           {currentUser /* Conditionally render logout button */ && (
             <Button onClick={handleLogout}>Logout</Button>

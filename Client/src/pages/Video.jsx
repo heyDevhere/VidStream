@@ -99,7 +99,6 @@ const ChannelDetail = styled.div`
 const ChannelName = styled.span`
   font-weight: 500;
   cursor: pointer;
-
 `;
 
 const ChannelCounter = styled.span`
@@ -125,130 +124,128 @@ const Subscribe = styled.button`
   cursor: pointer;
 `;
 
-
 const VideoFrame = styled.video`
-    height: 70vh;
-    width: 100%;
-    object-fit: cover;
-    z-index: 100;
-    position: sticky;
-    top: 0;
-  `;
+  height: 70vh;
+  width: 100%;
+  object-fit: cover;
+  z-index: 100;
+  position: sticky;
+  top: 0;
+`;
 
-  const WatchButton = styled.div`
-    position: relative;
-    cursor: pointer;
+const WatchButton = styled.div`
+  position: relative;
+  cursor: pointer;
 
-    &:hover::after {
-      content: "Watch Later";
-      position: absolute;
-      top: -80%;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: #333;
-      color: #fff;
-      padding: 5px;
-      border-radius: 5px;
-      font-size: 14px;
-      white-space: nowrap;
-    }
-  `;
+  &:hover::after {
+    content: "Watch Later";
+    position: absolute;
+    top: -80%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+`;
 
-  const NButton = styled.div`
-    position: relative;
-    cursor: pointer;
+const NButton = styled.div`
+  position: relative;
+  cursor: pointer;
 
-    &:hover::after {
-      content: "Notify";
-      position: absolute;
-      top: -80%;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: #333;
-      color: #fff;
-      padding: 5px;
-      border-radius: 5px;
-      font-size: 14px;
-      white-space: nowrap;
-    }
-  `;
+  &:hover::after {
+    content: "Notify";
+    position: absolute;
+    top: -80%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+`;
 
-  const DButton = styled.div`
-    position: relative;
-    cursor: pointer;
+const DButton = styled.div`
+  position: relative;
+  cursor: pointer;
 
-    &:hover::after {
-      content: "Download";
-      position: absolute;
-      top: -80%;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: #333;
-      color: #fff;
-      padding: 5px;
-      border-radius: 5px;
-      font-size: 14px;
-      white-space: nowrap;
-    }
-  `;
+  &:hover::after {
+    content: "Download";
+    position: absolute;
+    top: -80%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+`;
 
-  const LikeButton = styled.div`
-    position: relative;
-    cursor: pointer;
+const LikeButton = styled.div`
+  position: relative;
+  cursor: pointer;
 
-    &:hover::after {
-      content: "Like";
-      position: absolute;
-      top: -80%;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: #333;
-      color: #fff;
-      padding: 5px;
-      border-radius: 5px;
-      font-size: 14px;
-      white-space: nowrap;
-    }
-  `;
+  &:hover::after {
+    content: "Like";
+    position: absolute;
+    top: -80%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+`;
 
-  const DislikeButton = styled.div`
-    position: relative;
-    cursor: pointer;
+const DislikeButton = styled.div`
+  position: relative;
+  cursor: pointer;
 
-    &:hover::after {
-      content: "Dislike";
-      position: absolute;
-      top: -80%;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: #333;
-      color: #fff;
-      padding: 5px;
-      border-radius: 5px;
-      font-size: 14px;
-      white-space: nowrap;
-    }
-  `;
+  &:hover::after {
+    content: "Dislike";
+    position: absolute;
+    top: -80%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+`;
 
-  const SButton = styled.div`
-    position: relative;
-    cursor: pointer;
+const SButton = styled.div`
+  position: relative;
+  cursor: pointer;
 
-    &:hover::after {
-      content: "Share";
-      position: absolute;
-      top: -80%;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: #333;
-      color: #fff;
-      padding: 5px;
-      border-radius: 5px;
-      font-size: 14px;
-      white-space: nowrap;
-    }
-  `;
-
+  &:hover::after {
+    content: "Share";
+    position: absolute;
+    top: -80%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+`;
 
 const Video = () => {
   const { currentUser } = useSelector((state) => state.user);
@@ -267,7 +264,13 @@ const Video = () => {
   const handleWatchLater = async () => {
     if (currentUser) {
       try {
-        const res = await axios.put(`https://vidstream-mfy7.onrender.com/api/users/updatewatch/${path}`);
+        const res = await axios.put(
+          `http://localhost:8800/api/users/updatewatch/${path}`,
+          {},
+          {
+            withCredentials: true, // Include credentials in axios
+          }
+        );
         toast.success("Video Successfully added in Watch Later Section");
       } catch (error) {
         console.error("Error:", error);
@@ -291,29 +294,44 @@ const Video = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log("devis");
       try {
-        const videoRes = await axios.get(`https://vidstream-mfy7.onrender.com/api/videos/find/${path}`);
+        const videoRes = await axios.get(
+          `http://localhost:8800/api/videos/find/${path}`,
+          {
+            withCredentials: true, // Include credentials in axios
+          }
+        );
         const channelRes = await axios.get(
-          `https://vidstream-mfy7.onrender.com/api/users/find/${videoRes.data.userId}`
+          `http://localhost:8800/api/users/find/${videoRes.data.userId}`,
+          {
+            withCredentials: true, // Include credentials in axios
+          }
         );
         console.log(videoRes.data);
         dispatch(fetchSuccess(videoRes.data));
         setVideo(videoRes.data);
         setChannel(channelRes.data);
-      } catch (err) { console.log(err)}
+      } catch (err) {
+        console.log(err);
+      }
     };
     fetchData();
   }, [path, dispatch]);
 
   const handleLike = async () => {
     if (currentUser) {
-      await axios.put(`https://vidstream-mfy7.onrender.com/api/users/like/${video._id}`);
+      await axios.put(
+        `http://localhost:8800/api/users/like/${currentVideo._id}`,
+        {},
+        {
+          withCredentials: true, // Include credentials in axios
+        }
+      );
       if (currentUser._id) {
         dispatch(like(currentUser._id));
       }
     } else {
-      toast.error("login to like the video");
+      toast.error("login to like the currentVideo");
     }
   };
 
@@ -323,11 +341,10 @@ const Video = () => {
       behavior: "smooth",
     });
   };
-  
 
   const userInfo = () => {
     scrollToTop();
-    navigate(`/video/userInfo/${channel._id}`);
+    navigate(`/currentVideo/userInfo/${channel._id}`);
   };
 
   const handleShare = () => {
@@ -342,11 +359,12 @@ const Video = () => {
       });
   };
 
-  
   const handleDislike = async () => {
     console.log("wow");
     if (currentUser) {
-      await axios.put(`https://vidstream-mfy7.onrender.com/api/users/dislike/${video._id}`);
+      await axios.put(`http://localhost:8800/api/users/dislike/${video._id}`, {}, {
+        withCredentials: true // Include credentials in axios
+      });
       if (currentUser._id) {
         dispatch(dislike(currentUser._id));
       }
@@ -361,10 +379,16 @@ const Video = () => {
         let updatedSubscribers = channel?.subscribers ?? 0;
 
         if (currentUser.subscribedUsers.includes(channel._id)) {
-          await axios.put(`https://vidstream-mfy7.onrender.com/api/users/unsub/${channel._id}`);
+          await axios.put(
+            `http://localhost:8800/api/users/unsub/${channel._id}`, {}, {
+              withCredentials: true // Include credentials in axios
+            });
           updatedSubscribers -= 1;
         } else {
-          await axios.put(`https://vidstream-mfy7.onrender.com/api/users/sub/${channel._id}`);
+          await axios.put(
+            `http://localhost:8800/api/users/sub/${channel._id}`, {}, {
+              withCredentials: true // Include credentials in axios
+            });
           updatedSubscribers += 1;
         }
 
@@ -393,10 +417,7 @@ const Video = () => {
     <Container>
       <Content>
         <VideoWrapper>
-          <VideoFrame
-            src={video.videoUrl}
-            controls
-          />
+          <VideoFrame src={video.videoUrl} controls />
 
           {/* {videoRef.current?.audioTracks &&
             videoRef.current.audioTracks.length > 1 && (
@@ -421,23 +442,23 @@ const Video = () => {
           <Buttons>
             <LikeButton>
               <Button onClick={handleLike}>
-                {video.likes?.includes(currentUser?._id) ? (
+                {currentVideo.likes?.includes(currentUser?._id) ? (
                   <ThumbUpIcon />
                 ) : (
                   <ThumbUpOutlinedIcon />
                 )}{" "}
-                {video.likes?.length}
+                {currentVideo.likes?.length}
               </Button>
             </LikeButton>
 
             <DislikeButton>
               <Button onClick={handleDislike}>
-                {video.dislikes?.includes(currentUser?._id) ? (
+                {currentVideo.dislikes?.includes(currentUser?._id) ? (
                   <ThumbDownIcon />
                 ) : (
                   <ThumbDownOffAltOutlinedIcon />
                 )}{" "}
-                {video.dislikes?.length}
+                {currentVideo.dislikes?.length}
               </Button>
             </DislikeButton>
             <Button>
@@ -468,8 +489,10 @@ const Video = () => {
           <ChannelInfo>
             <Image src={channel.img} onClick={userInfo} />
             <ChannelDetail>
-              <ChannelName onClick={userInfo} >{channel.name}</ChannelName>
-              <ChannelCounter onClick={userInfo}>{channel.subscribers} subscribers</ChannelCounter>
+              <ChannelName onClick={userInfo}>{channel.name}</ChannelName>
+              <ChannelCounter onClick={userInfo}>
+                {channel.subscribers} subscribers
+              </ChannelCounter>
               <Description>{video.desc}</Description>
             </ChannelDetail>
           </ChannelInfo>

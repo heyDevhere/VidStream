@@ -12,7 +12,9 @@ const Recommendation = ({ tags , excludeId}) => {
 
   useEffect(() => {
     const fetchVideos = async () => {
-      const res = await axios.get(`https://vidstream-mfy7.onrender.com/api/videos/tags?tags=${tags}`);
+      const res = await axios.get(`http://localhost:8800/api/videos/tags?tags=${tags}`, {
+        withCredentials: true // Include credentials in axios
+      });
       const filteredVideos = res.data.filter(video => video._id !== excludeId);
       setVideos(filteredVideos);
     };

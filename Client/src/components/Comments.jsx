@@ -59,7 +59,9 @@ const Comments = ({ videoId }) => {
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const res = await axios.get(`https://vidstream-mfy7.onrender.com/api/comments/${videoId}`);
+        const res = await axios.get(`http://localhost:8800/api/comments/${videoId}`,{
+          withCredentials: true // Include credentials in axios
+        });
         setComments(res.data);
       } catch (err) {}
     };
@@ -73,9 +75,11 @@ const Comments = ({ videoId }) => {
   const handleAddComment = async () => {
     if(currentUser){
     try {
-      const res = await axios.post(`https://vidstream-mfy7.onrender.com/api/comments`, {
+      const res = await axios.post(`http://localhost:8800/api/comments`, {
         desc: newCommentText,
         videoId: videoId,
+      }, {
+        withCredentials: true // Include credentials in axios
       });
       const newComment = res.data;
       setComments([...comments, newComment]);
@@ -90,16 +94,6 @@ const Comments = ({ videoId }) => {
   }
   };
 
-
-  useEffect(() => {
-    const fetchComments = async () => {
-      try {
-        const res = await axios.get(`https://vidstream-mfy7.onrender.com/api/comments/${videoId}`);
-        setComments(res.data);
-      } catch (err) {}
-    };
-    fetchComments();
-  }, [videoId]);
 
   //   //TODO: ADD NEW COMMENT FUNCTIONALITY
   const imgUrl = currentUser?.img || defaultImg;

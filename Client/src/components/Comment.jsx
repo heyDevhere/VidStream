@@ -66,7 +66,9 @@ const Comment = ({ comment,userId,onDelete }) => {
 
   useEffect(() => {
     const fetchComment = async () => {
-      const res = await axios.get(`https://vidstream-mfy7.onrender.com/api/users/find/${comment.userId}`);
+      const res = await axios.get(`http://localhost:8800/api/users/find/${comment.userId}`,{
+        withCredentials: true // Include credentials in axios
+      });
       setChannel(res.data);
     };
     fetchComment();
@@ -74,7 +76,9 @@ const Comment = ({ comment,userId,onDelete }) => {
 
   const handleDelete = async () => {
     try {
-      const res=await axios.delete(`https://vidstream-mfy7.onrender.com/api/comments/${comment._id}`); // Call the delete API
+      const res=await axios.delete(`http://localhost:8800/api/comments/${comment._id}`,{
+        withCredentials: true // Include credentials in axios
+      }); // Call the delete API
       toast.success("Comment Deleted Successfully!")
       onDelete(comment._id); // Call the callback function to update UI
 

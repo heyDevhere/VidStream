@@ -14,7 +14,7 @@ import {
   getUploadedVideos,
   getUsersWithVideos,
 } from "../controllers/user.js";
-import { verifyToken } from "../verifyToken.js";
+import { verifyToken } from "../verifyToken.mjs";
 
 const router = express.Router();
 

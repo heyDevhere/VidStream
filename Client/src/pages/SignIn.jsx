@@ -26,7 +26,6 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: calc(100vh - 56px);
   color: ${({ theme }) => theme.text};
 `;
 
@@ -154,7 +153,9 @@ const SignIn = () => {
     e.preventDefault();
     dispatch(loginStart());
     try {
-      const res = await axios.post(`https://vidstream-mfy7.onrender.com/api/auth/signin`, { name, password });
+      const res = await axios.post(`http://localhost:8800/api/auth/signin`, { name, password },{
+        withCredentials: true // Include credentials
+      });
       dispatch(loginSuccess(res.data));
       toast.success("Login successful!");
       navigate("/");
@@ -168,7 +169,9 @@ const SignIn = () => {
     e.preventDefault();
     // dispatch(loginStart());
     try {
-      const res = await axios.post(`https://vidstream-mfy7.onrender.com/api/auth/signup`, { name, email, password,inputs });
+      const res = await axios.post(`http://localhost:8800/api/auth/signup`, { name, email, password,inputs },{
+        withCredentials: true   
+      });
       toast.success(res.data);
       // dispatch(loginSuccess(res.data));
       // console.log(res.data);
@@ -185,10 +188,12 @@ const SignIn = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
         axios
-          .post(`https://vidstream-mfy7.onrender.com/api/auth/google`, {
+          .post(`http://localhost:8800/api/auth/google`, {
             name: result.user.displayName,
             email: result.user.email,
             img: result.user.photoURL,
+          },{
+            withCredentials:true
           })
           .then((res) => {
             dispatch(loginSuccess(res.data));

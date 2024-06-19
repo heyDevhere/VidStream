@@ -14,7 +14,10 @@ const Container = styled.div`
   display: ${(props) => props.type === "sm" && "flex"};
   gap: 10px;
   flex-direction: column;
-
+  @media (max-width: 768px) {
+      /* justify-content: center;
+      align-items: center; */
+  }
 `;
 
 const Image = styled.img`
@@ -24,7 +27,6 @@ const Image = styled.img`
   object-fit: contain;
   background-size: cover;
   border-radius: 3%;
-
 
 `;
 
@@ -62,6 +64,10 @@ const Info = styled.div`
   color: ${({ theme }) => theme.textSoft};
 `;
 
+const Parent = styled.div`
+
+`;
+
 
 const scrollToTop = () => {
   window.scrollTo({
@@ -77,7 +83,9 @@ const Card = ({ type,video}) => {
 
   useEffect(() => {
     const fetchChannel = async () => {
-      const res = await axios.get(`https://vidstream-mfy7.onrender.com/api/users/find/${video.userId}`);
+      const res = await axios.get(`http://localhost:8800/api/users/find/${video.userId}`,{
+        withCredentials: true // Include credentials in axios
+      });
       setChannel(res.data);
      
     };
@@ -89,13 +97,17 @@ const Card = ({ type,video}) => {
 
     if(currentUser){
       try {
-        const res = await axios.put(`https://vidstream-mfy7.onrender.com/api/users/${video._id}`);
+        const res = await axios.put(`http://localhost:8800/api/users/${video._id}`, {}, {
+          withCredentials: true // Include credentials in axios
+        });
       } catch (error) {
         console.error("Error:", error);
       }
     }
     try {
-      const res2 = await axios.put(`https://vidstream-mfy7.onrender.com/api/videos/view/${video._id}`);
+      const res2 = await axios.put(`http://localhost:8800/api/videos/view/${video._id}`, {}, {
+        withCredentials: true // Include credentials in axios
+      });
     } catch (error) {
       console.log(error);
     }
@@ -104,6 +116,7 @@ const Card = ({ type,video}) => {
 
   return (
     <Link to={`/video/${video._id}`} style={{ textDecoration: "none" }} onClick={handleClick} >
+      <Parent>
     <Container type={type}>
       <Image
         type={type}
@@ -121,6 +134,7 @@ const Card = ({ type,video}) => {
         </Texts>
       </Details>
     </Container>
+     </Parent>
   </Link>
   );
 };

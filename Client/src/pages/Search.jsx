@@ -19,7 +19,9 @@ const Search = () => {
 
   useEffect(() => {
     const fetchVideos = async () => {
-      const res = await axios.get(`https://vidstream-mfy7.onrender.com/api/videos/search${query}`);
+      const res = await axios.get(`http://localhost:8800/api/videos/search${query}`,{
+        withCredentials: true // Include credentials in axios
+      });
       setVideos(res.data);
     };
     fetchVideos();

@@ -20,9 +20,9 @@ import { useEffect } from "react";
 const Container = styled.div`
   display: flex;
   overflow-x: hidden; 
-  height:1000vh;
-
-
+  margin-top: 46px;
+  min-height: 100vh;
+  max-height: auto;
 `;
 
 const Main = styled.div`
@@ -32,12 +32,11 @@ const Main = styled.div`
 `;
 const Wrapper = styled.div`
   padding: 22px 36px 22px 25px;
+
   @media (max-width: 768px) {
-    /* padding: 22px 50px 22px 25px; */
-    margin-right:20px;
-    padding-right:20px;
   }
 `;
+
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
@@ -69,12 +68,12 @@ function App() {
   return (
     <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
       <Container>
-      <BackToTop />
+        <BackToTop />
 
         <BrowserRouter>
-          <Menu darkMode={darkMode} setDarkMode={setDarkMode} menuOpen={menuOpen} toggleMenu={toggleMenu}/>
+            <Menu darkMode={darkMode} setDarkMode={setDarkMode} menuOpen={menuOpen} toggleMenu={toggleMenu} />
           <Main>
-            <Navbar toggleMenu={toggleMenu} menuOpen={menuOpen}/>
+            <Navbar toggleMenu={toggleMenu} menuOpen={menuOpen} />
             <Wrapper>
               <Routes>
                 <Route path="/">
@@ -87,16 +86,16 @@ function App() {
                   <Route path="gaming" element={<MyTags type="Game" />} />
                   <Route path="movies" element={<MyTags type="Movie" />} />
                   <Route path="news" element={<MyTags type="News" />} />
-                  <Route path="*" element={<Error/>} />
+                  <Route path="*" element={<Error />} />
 
 
 
 
 
 
-                  <Route path="history" element={<History/>} />
-                  <Route path="search" element={<Search/>} />
-                  <Route path="watchlater" element={<WatchLater/>} />
+                  <Route path="history" element={<History />} />
+                  <Route path="search" element={<Search />} />
+                  <Route path="watchlater" element={<WatchLater />} />
 
                   <Route path="signin" element={<SignIn />} />
                   <Route path="video">
