@@ -100,7 +100,7 @@ const Notify = ({ setVideoCount, setNotificationOpen }) => {
     const fetchVideos = async () => {
       try {
         const notificationsResponse = await axios.get(
-          "http://localhost:8800/api/notify/getNotifications",{
+          "https://vidstream-mfy7.onrender.com/api/notify/getNotifications",{
             withCredentials: true 
           });
         const notifications = await notificationsResponse.json();
@@ -117,7 +117,7 @@ const Notify = ({ setVideoCount, setNotificationOpen }) => {
 
 
         const videoDetailsPromises = videoIds.map(videoId =>
-          axios.get(`http://localhost:8800/api/videos/find/${videoId}`,{
+          axios.get(`https://vidstream-mfy7.onrender.com/api/videos/find/${videoId}`,{
             withCredentials: true // Include credentials in axios
           })
         );
@@ -139,7 +139,7 @@ const Notify = ({ setVideoCount, setNotificationOpen }) => {
   const fetchVideos = async () => {
     try {
       const notificationsResponse = await axios.get(
-        "http://localhost:8800/api/notify/getNotifications",{
+        "https://vidstream-mfy7.onrender.com/api/notify/getNotifications",{
           withCredentials: true 
         });
       const notifications = await notificationsResponse.json();
@@ -156,7 +156,7 @@ const Notify = ({ setVideoCount, setNotificationOpen }) => {
 
 
       const videoDetailsPromises = videoIds.map(videoId =>
-        axios.get(`http://localhost:8800/api/videos/find/${videoId}`, {
+        axios.get(`https://vidstream-mfy7.onrender.com/api/videos/find/${videoId}`, {
           withCredentials: true // Include credentials in axios
         })
       );

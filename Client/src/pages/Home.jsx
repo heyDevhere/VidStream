@@ -19,7 +19,7 @@ const Home = ({type}) => {
 
   useEffect(() => {
     const fetchVideos = async () => {
-      const res = await axios.get(`http://localhost:8800/api/videos/${type}`,{
+      const res = await axios.get(`https://vidstream-mfy7.onrender.com/api/videos/${type}`,{
         withCredentials: true // Include credentials in axios
       });
       setVideos(res.data);

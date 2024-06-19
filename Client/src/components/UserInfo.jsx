@@ -31,10 +31,10 @@ const UserInfo = ({type}) => {
 
   useEffect(() => {
     const fetchVideos = async () => {
-      const res = await axios.get(`http://localhost:8800/api/users/get/userInfo/${path}`,{
+      const res = await axios.get(`https://vidstream-mfy7.onrender.com/api/users/get/userInfo/${path}`,{
         withCredentials: true // Include credentials in axios
       });
-      const res2 = await axios.get(`http://localhost:8800/api/users/find/${path}`,{
+      const res2 = await axios.get(`https://vidstream-mfy7.onrender.com/api/users/find/${path}`,{
         withCredentials: true // Include credentials in axios
       });
       setUserdata(res2.data);

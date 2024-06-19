@@ -356,7 +356,7 @@ const Navbar = ({ toggleMenu, menuOpen }) => {
       const fetchVideos = async () => {
         try {
           const notificationsResponse = await axios.get(
-            "http://localhost:8800/api/notify/getNotifications",{
+            "https://vidstream-mfy7.onrender.com/api/notify/getNotifications",{
               withCredentials: true 
             });
           if(!notificationsResponse.ok) console.log("shit");
@@ -368,7 +368,7 @@ const Navbar = ({ toggleMenu, menuOpen }) => {
 
           const videoDetailsPromises = videoIds.map((videoId) =>
             axios.get(
-              `http://localhost:8800/api/videos/find/${videoId}`,{
+              `https://vidstream-mfy7.onrender.com/api/videos/find/${videoId}`,{
                 withCredentials: true 
               })
           );

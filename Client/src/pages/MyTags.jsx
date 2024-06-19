@@ -14,7 +14,7 @@ const MyTags = ({ type}) => {
 
   useEffect(() => {
     const fetchVideos = async () => {
-      const res = await axios.get(`http://localhost:8800/api/videos/tags?tags=${type}`,{
+      const res = await axios.get(`https://vidstream-mfy7.onrender.com/api/videos/tags?tags=${type}`,{
         withCredentials: true // Include credentials in axios
       });
       setVideos(res.data);

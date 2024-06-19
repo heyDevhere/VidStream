@@ -300,7 +300,7 @@ const Video = () => {
     if (currentUser) {
       try {
         const res = await axios.put(
-          `http://localhost:8800/api/users/updatewatch/${path}`,
+          `https://vidstream-mfy7.onrender.com/api/users/updatewatch/${path}`,
           {},
           {
             withCredentials: true, // Include credentials in axios
@@ -331,13 +331,13 @@ const Video = () => {
     const fetchData = async () => {
       try {
         const videoRes = await axios.get(
-          `http://localhost:8800/api/videos/find/${path}`,
+          `https://vidstream-mfy7.onrender.com/api/videos/find/${path}`,
           {
             withCredentials: true, // Include credentials in axios
           }
         );
         const channelRes = await axios.get(
-          `http://localhost:8800/api/users/find/${videoRes.data.userId}`,
+          `https://vidstream-mfy7.onrender.com/api/users/find/${videoRes.data.userId}`,
           {
             withCredentials: true, // Include credentials in axios
           }
@@ -356,7 +356,7 @@ const Video = () => {
   const handleLike = async () => {
     if (currentUser) {
       await axios.put(
-        `http://localhost:8800/api/users/like/${currentVideo._id}`,
+        `https://vidstream-mfy7.onrender.com/api/users/like/${currentVideo._id}`,
         {},
         {
           withCredentials: true, // Include credentials in axios
@@ -398,7 +398,7 @@ const Video = () => {
     console.log("wow");
     if (currentUser) {
       await axios.put(
-        `http://localhost:8800/api/users/dislike/${video._id}`,
+        `https://vidstream-mfy7.onrender.com/api/users/dislike/${video._id}`,
         {},
         {
           withCredentials: true, // Include credentials in axios
@@ -419,7 +419,7 @@ const Video = () => {
 
         if (currentUser.subscribedUsers.includes(channel._id)) {
           await axios.put(
-            `http://localhost:8800/api/users/unsub/${channel._id}`,
+            `https://vidstream-mfy7.onrender.com/api/users/unsub/${channel._id}`,
             {},
             {
               withCredentials: true, // Include credentials in axios
@@ -428,7 +428,7 @@ const Video = () => {
           updatedSubscribers -= 1;
         } else {
           await axios.put(
-            `http://localhost:8800/api/users/sub/${channel._id}`,
+            `https://vidstream-mfy7.onrender.com/api/users/sub/${channel._id}`,
             {},
             {
               withCredentials: true, // Include credentials in axios

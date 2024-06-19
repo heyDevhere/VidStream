@@ -98,7 +98,7 @@ const Card = ({ type,video}) => {
 
   useEffect(() => {
     const fetchChannel = async () => {
-      const res = await axios.get(`http://localhost:8800/api/users/find/${video.userId}`,{
+      const res = await axios.get(`https://vidstream-mfy7.onrender.com/api/users/find/${video.userId}`,{
         withCredentials: true // Include credentials in axios
       });
       setChannel(res.data);
@@ -112,7 +112,7 @@ const Card = ({ type,video}) => {
 
     if(currentUser){
       try {
-        const res = await axios.put(`http://localhost:8800/api/users/${video._id}`, {}, {
+        const res = await axios.put(`https://vidstream-mfy7.onrender.com/api/users/${video._id}`, {}, {
           withCredentials: true // Include credentials in axios
         });
       } catch (error) {
@@ -120,7 +120,7 @@ const Card = ({ type,video}) => {
       }
     }
     try {
-      const res2 = await axios.put(`http://localhost:8800/api/videos/view/${video._id}`, {}, {
+      const res2 = await axios.put(`https://vidstream-mfy7.onrender.com/api/videos/view/${video._id}`, {}, {
         withCredentials: true // Include credentials in axios
       });
     } catch (error) {
