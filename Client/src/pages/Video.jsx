@@ -114,15 +114,14 @@ const ChannelCounter = styled.span`
 
 const Description = styled.p`
   font-size: 14px;
-    color: ${({ theme }) => theme.text};
-    margin-top: 5px;
-    display: -webkit-box;
-    -webkit-line-clamp: ${({ expanded }) => (expanded ? "none" : "2")};
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    position:relative;
-    
+  color: ${({ theme }) => theme.text};
+  margin-top: 5px;
+  display: -webkit-box;
+  -webkit-line-clamp: ${({ expanded }) => (expanded ? "none" : "2")};
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
 `;
 
 const SeeMoreButton = styled.button`
@@ -134,10 +133,9 @@ const SeeMoreButton = styled.button`
   margin-top: 5px;
   text-align: right;
   /* text-align: right; */
-  
-  positon:absolute;
+
+  positon: absolute;
   @media (max-width: 768px) {
-    
   }
 `;
 
@@ -286,6 +284,8 @@ const Video = () => {
   const [selectedTrack, setSelectedTrack] = useState(null);
   const videoRef = useRef(null);
   const [isExpanded, setIsExpanded] = useState(false);
+  // const [isExpanded, setIsExpanded] = useState();
+  // const [isExpanded, setIsExpanded] = useState();
 
   const toggleDescription = () => {
     setIsExpanded(!isExpanded);
@@ -353,23 +353,6 @@ const Video = () => {
     fetchData();
   }, [path, dispatch]);
 
-  const handleLike = async () => {
-    if (currentUser) {
-      await axios.put(
-        `https://vidstream-mfy7.onrender.com/api/users/like/${currentVideo._id}`,
-        {},
-        {
-          withCredentials: true, // Include credentials in axios
-        }
-      );
-      if (currentUser._id) {
-        dispatch(like(currentUser._id));
-      }
-    } else {
-      toast.error("login to like the currentVideo");
-    }
-  };
-
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -392,24 +375,6 @@ const Video = () => {
       .catch((err) => {
         console.error("Failed to copy: ", err);
       });
-  };
-
-  const handleDislike = async () => {
-    console.log("wow");
-    if (currentUser) {
-      await axios.put(
-        `https://vidstream-mfy7.onrender.com/api/users/dislike/${video._id}`,
-        {},
-        {
-          withCredentials: true, // Include credentials in axios
-        }
-      );
-      if (currentUser._id) {
-        dispatch(dislike(currentUser._id));
-      }
-    } else {
-      toast.error("login to dislike the video!");
-    }
   };
 
   const handleSub = async () => {
@@ -450,6 +415,131 @@ const Video = () => {
       toast.error("Login First!");
     }
   };
+  // const handleLike = async () => {
+  //   if (currentUser) {
+  //     let updatedlikes = video?.likes ?? 0;
+  //     let updateddislikes = video?.dislikes ?? 0;
+  //     await axios.put(
+  //       `https://vidstream-mfy7.onrender.com/api/users/like/${currentVideo._id}`,
+  //       {},
+  //       {
+  //         withCredentials: true, // Include credentials in axios
+  //       }
+  //     );
+
+  //     setVideo((prev) => ({
+  //       ...prev,
+  //       likes: updatedlikes,
+  //     }));
+  //     if (currentUser._id) {
+  //       dispatch(like(currentUser._id));
+  //     }
+  //   } else {
+  //     toast.error("login to like the currentVideo");
+  //   }
+  // };
+
+  // const handleDislike = async () => {
+  //   console.log("wow");
+  //   if (currentUser) {
+  //     await axios.put(
+  //       `https://vidstream-mfy7.onrender.com/api/users/dislike/${video._id}`,
+  //       {},
+  //       {
+  //         withCredentials: true, // Include credentials in axios
+  //       }
+  //     );
+  //     if (currentUser._id) {
+  //       dispatch(dislike(currentUser._id));
+  //     }
+  //   } else {
+  //     toast.error("login to dislike the video!");
+  //   }
+  // };
+
+  const handleLike = async () => {
+    if (currentUser) {
+      await axios.put(
+        `https://vidstream-mfy7.onrender.com/api/users/like/${currentVideo._id}`,
+        {},
+        {
+          withCredentials: true, // Include credentials in axios
+        }
+      );
+
+      // Dispatch the like action
+      dispatch(like(currentUser._id));
+
+      // Compute the updated likes and dislikes
+      let updatedLikes = video.likes ?? 0;
+      let updatedDislikes = video.dislikes ?? 0;
+
+      const likesIndex = video.likes.indexOf(currentUser._id);
+      const dislikesIndex = video.dislikes.indexOf(currentUser._id);
+
+      if (likesIndex !== -1) {
+        // User has already liked the video, so remove their like
+        updatedLikes--;
+      } else {
+        // User has not liked the video, so add their like and remove any dislike
+        updatedLikes++;
+        if (dislikesIndex !== -1) {
+          updatedDislikes--;
+        }
+      }
+
+      // Update the video state
+      setVideo((prev) => ({
+        ...prev,
+        likes: updatedLikes,
+        dislikes: updatedDislikes,
+      }));
+    } else {
+      toast.error("Login to like the video");
+    }
+  };
+
+  const handleDislike = async () => {
+    if (currentUser) {
+      await axios.put(
+        `https://vidstream-mfy7.onrender.com/api/users/dislike/${video._id}`,
+        {},
+        {
+          withCredentials: true, // Include credentials in axios
+        }
+      );
+
+      // Dispatch the dislike action
+      dispatch(dislike(currentUser._id));
+
+      // Compute the updated likes and dislikes
+      let updatedLikes = video.likes ?? 0;
+      let updatedDislikes = video.dislikes ?? 0;
+
+      const likesIndex = video.likes.indexOf(currentUser._id);
+      const dislikesIndex = video.dislikes.indexOf(currentUser._id);
+
+      if (dislikesIndex !== -1) {
+        // User has already disliked the video, so remove their dislike
+        updatedDislikes--;
+      } else {
+        // User has not disliked the video, so add their dislike and remove any like
+        updatedDislikes++;
+        if (likesIndex !== -1) {
+          updatedLikes--;
+        }
+      }
+
+      // Update the video state
+      setVideo((prev) => ({
+        ...prev,
+        likes: updatedLikes,
+        dislikes: updatedDislikes,
+      }));
+    } else {
+      toast.error("Login to dislike the video!");
+    }
+  };
 
   const handleTrackChange = (trackIndex) => {
     const tracks = videoRef.current?.audioTracks;
@@ -467,7 +557,7 @@ const Video = () => {
           {/* {videoRef.current?.audioTracks &&
             videoRef.current.audioTracks.length > 1 && (
               <div>
-                {videoRef.current.audioTracks.map((track, index) => (
+              {videoRef.current.audioTracks.map((track, index) => (
                   <button
                     key={index}
                     onClick={() => handleTrackChange(index)}
@@ -487,23 +577,23 @@ const Video = () => {
           <Buttons>
             <LikeButton>
               <Button onClick={handleLike}>
-                {currentVideo.likes?.includes(currentUser?._id) ? (
+                {video.likes?.includes(currentUser?._id) ? (
                   <ThumbUpIcon />
                 ) : (
                   <ThumbUpOutlinedIcon />
                 )}{" "}
-                {currentVideo.likes?.length}
+                {video.likes?.length ?? 0}
               </Button>
             </LikeButton>
 
             <DislikeButton>
               <Button onClick={handleDislike}>
-                {currentVideo.dislikes?.includes(currentUser?._id) ? (
+                {video.dislikes?.includes(currentUser?._id) ? (
                   <ThumbDownIcon />
                 ) : (
                   <ThumbDownOffAltOutlinedIcon />
                 )}{" "}
-                {currentVideo.dislikes?.length}
+                {video.dislikes?.length ?? 0}
               </Button>
             </DislikeButton>
             <Button>
