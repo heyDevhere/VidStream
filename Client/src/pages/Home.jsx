@@ -8,9 +8,8 @@ const Container = styled.div`
   justify-content: space-between;
   flex-wrap: wrap;
   @media (max-width: 768px) {
-    padding-right: 34px;
     flex-direction: column;
-   
+    align-items: center; 
   }
 `;
 

@@ -6,17 +6,21 @@ import {format} from "timeago.js";
 import { useDispatch, useSelector } from "react-redux";
 
 const Container = styled.div`
+  margin-bottom: ${(props) => (props.type === "sm" ? "10px" : "25px")};
   width: ${(props) => props.type !== "sm" && "350px"};
-  margin-bottom: ${(props) => (props.type === "sm" ? "10px" : "45px")};
   margin-top: auto;
   cursor: pointer;
   margin-right:2px;
   display: ${(props) => props.type === "sm" && "flex"};
   gap: 10px;
+      /* margin-bottom: ${(props) => (props.type === "sm" ? "2px" : "20px")}; */
+
   flex-direction: column;
   @media (max-width: 768px) {
-      /* justify-content: center;
-      align-items: center; */
+    width: 100%;
+    min-width:310px;
+    margin-bottom: ${(props) => (props.type === "sm" ? "15px" : "20px")};
+
   }
 `;
 
@@ -25,9 +29,19 @@ const Image = styled.img`
   background-color: #999;
   flex: 1;
   object-fit: contain;
+  /* width: 100%; */
+  /* height: auto; */
+
   background-size: cover;
   border-radius: 3%;
+  @media (max-width: 768px) {
+    object-fit: cover;
 
+      width: 100%;
+      height: auto;
+
+  }
+ 
 `;
 
 const Details = styled.div`
@@ -35,6 +49,7 @@ const Details = styled.div`
   margin-top: ${(props) => props.type !== "sm" && "16px"};
   gap: 12px;
   flex: 1;
+  
 `;
 
 const ChannelImage = styled.img`

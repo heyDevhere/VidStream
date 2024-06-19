@@ -94,6 +94,7 @@ const Dev = styled.div`
 
 const SearchIconWrapper = styled(SearchIcon)`
   color: ${({ theme }) => theme.text};
+  cursor:pointer;
 `;
 
 // const Button = styled.button`
@@ -177,6 +178,8 @@ const Input = styled.input`
 
   @media (max-width: 768px) {
     width: 80px;
+    width: ${({ currentUser }) =>
+    currentUser ? "80px" : "116px"};
   }
 `;
 

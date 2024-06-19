@@ -49,6 +49,9 @@ const Details = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  @media (max-width: 768px) {
+    margin-top: 22px;
+  }
 `;
 
 const Info = styled.span`
@@ -57,7 +60,7 @@ const Info = styled.span`
 
 const Buttons = styled.div`
   display: flex;
-  gap: 20px;
+  gap: 15px;
   color: ${({ theme }) => theme.text};
 `;
 
@@ -111,6 +114,31 @@ const ChannelCounter = styled.span`
 
 const Description = styled.p`
   font-size: 14px;
+    color: ${({ theme }) => theme.text};
+    margin-top: 5px;
+    display: -webkit-box;
+    -webkit-line-clamp: ${({ expanded }) => (expanded ? "none" : "2")};
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    position:relative;
+    
+`;
+
+const SeeMoreButton = styled.button`
+  background: none;
+  border: none;
+  color: ${({ theme }) => theme.text};
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 5px;
+  text-align: right;
+  /* text-align: right; */
+  
+  positon:absolute;
+  @media (max-width: 768px) {
+    
+  }
 `;
 
 const Subscribe = styled.button`
@@ -207,6 +235,8 @@ const LikeButton = styled.div`
     font-size: 14px;
     white-space: nowrap;
   }
+  @media (max-width: 768px) {
+  }
 `;
 
 const DislikeButton = styled.div`
@@ -255,6 +285,11 @@ const Video = () => {
   const dispatch = useDispatch();
   const [selectedTrack, setSelectedTrack] = useState(null);
   const videoRef = useRef(null);
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const toggleDescription = () => {
+    setIsExpanded(!isExpanded);
+  };
 
   const [channel, setChannel] = useState({});
   const [video, setVideo] = useState([]);
@@ -362,9 +397,13 @@ const Video = () => {
   const handleDislike = async () => {
     console.log("wow");
     if (currentUser) {
-      await axios.put(`http://localhost:8800/api/users/dislike/${video._id}`, {}, {
-        withCredentials: true // Include credentials in axios
-      });
+      await axios.put(
+        `http://localhost:8800/api/users/dislike/${video._id}`,
+        {},
+        {
+          withCredentials: true, // Include credentials in axios
+        }
+      );
       if (currentUser._id) {
         dispatch(dislike(currentUser._id));
       }
@@ -380,15 +419,21 @@ const Video = () => {
 
         if (currentUser.subscribedUsers.includes(channel._id)) {
           await axios.put(
-            `http://localhost:8800/api/users/unsub/${channel._id}`, {}, {
-              withCredentials: true // Include credentials in axios
-            });
+            `http://localhost:8800/api/users/unsub/${channel._id}`,
+            {},
+            {
+              withCredentials: true, // Include credentials in axios
+            }
+          );
           updatedSubscribers -= 1;
         } else {
           await axios.put(
-            `http://localhost:8800/api/users/sub/${channel._id}`, {}, {
-              withCredentials: true // Include credentials in axios
-            });
+            `http://localhost:8800/api/users/sub/${channel._id}`,
+            {},
+            {
+              withCredentials: true, // Include credentials in axios
+            }
+          );
           updatedSubscribers += 1;
         }
 
@@ -493,7 +538,13 @@ const Video = () => {
               <ChannelCounter onClick={userInfo}>
                 {channel.subscribers} subscribers
               </ChannelCounter>
-              <Description>{video.desc}</Description>
+              {/* <Description>{video.desc}</Description> */}
+              <Description expanded={isExpanded}>{video.desc}</Description>
+              {video.desc?.length > 100 && ( // Assuming 100 characters is a rough estimate for 3 lines
+                <SeeMoreButton onClick={toggleDescription}>
+                  {isExpanded ? "Show Less" : "Show More"}
+                </SeeMoreButton>
+              )}
             </ChannelDetail>
           </ChannelInfo>
 
