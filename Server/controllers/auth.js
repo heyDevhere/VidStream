@@ -42,8 +42,8 @@ export const signin = async (req, res, next) => {
     res.cookie('access_token', token, {
       expires: new Date(Date.now() + 25892000000), // Adjust expiry time as needed
       httpOnly: true,
-      secure: false, // Should be false in development (localhost)
-      sameSite: 'Lax' // or 'None' if dealing with cross-domain requests
+      secure: true, // Should be true in production
+      sameSite: 'None' // Use 'None' if dealing with cross-domain requests
     }).status(200).json(others)
 
 
@@ -68,9 +68,9 @@ export const googleAuth = async (req, res, next) => {
       res.cookie('access_token', token, {
         expires: new Date(Date.now() + 25892000000), // Adjust expiry time as needed
         httpOnly: true,
-        secure: false, // Should be false in development (localhost)
-        sameSite: 'Lax' // or 'None' if dealing with cross-domain requests    
-       })
+        secure: true, // Should be true in production
+        sameSite: 'None' // Use 'None' if dealing with cross-domain requests
+      })
         .status(200)
         .json(user._doc);
     } else {
@@ -86,8 +86,8 @@ export const googleAuth = async (req, res, next) => {
       res.cookie('access_token', token, {
         expires: new Date(Date.now() + 25892000000), // Adjust expiry time as needed
         httpOnly: true,
-        secure: false, // Should be false in development (localhost)
-        sameSite: 'Lax' // or 'None' if dealing with cross-domain requests
+        secure: true, // Should be true in production
+        sameSite: 'None' // Use 'None' if dealing with cross-domain requests
       })
         .status(200)
         .json(savedUser._doc);
