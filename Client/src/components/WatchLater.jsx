@@ -8,9 +8,10 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+  margin-left: ${(props) => (props.menuOpen ? '290px' : '0px')}; 
 `;
 
-const History = ({type}) => {
+const History = ({type,menuOpen}) => {
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -39,7 +40,7 @@ const History = ({type}) => {
   }
 
   return (
-    <Container>
+    <Container menuOpen={menuOpen} >
       {videos.map((video) => (
         <Card key={video._id} video={video}/>
       ))}

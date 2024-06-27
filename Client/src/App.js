@@ -85,20 +85,20 @@ function App() {
                   <Route path="trends" element={<Home type="trend" menuOpen={menuOpen}/>} />
                   <Route path="subscriptions" element={<Home type="sub" menuOpen={menuOpen}/>} />
 
-                  <Route path="music" element={<MyTags type="Music" />} />
-                  <Route path="sports" element={<MyTags type="Sport" />} />
-                  <Route path="gaming" element={<MyTags type="Game" />} />
-                  <Route path="movies" element={<MyTags type="Movie" />} />
-                  <Route path="news" element={<MyTags type="News" />} />
-                  <Route path="*" element={<Error />} />
-                  <Route path="history" element={<History />} />
-                  <Route path="search" element={<Search />} />
-                  <Route path="watchlater" element={<WatchLater />} />
+                  <Route path="music" element={<MyTags type="Music" menuOpen={menuOpen}/>} />
+                  <Route path="sports" element={<MyTags type="Sport" menuOpen={menuOpen}/>} />
+                  <Route path="gaming" element={<MyTags type="Game" menuOpen={menuOpen}/>} />
+                  <Route path="movies" element={<MyTags type="Movie" menuOpen={menuOpen}/>} />
+                  <Route path="news" element={<MyTags type="News" menuOpen={menuOpen}/>} />
+                  <Route path="*" element={<Error  menuOpen={menuOpen}/>} />
+                  <Route path="history" element={<History menuOpen={menuOpen}/>} />
+                  <Route path="search" element={<Search  menuOpen={menuOpen} />} />
+                  <Route path="watchlater" element={<WatchLater menuOpen={menuOpen}/>} />
 
                   <Route path="signin" element={<SignIn />} />
                   <Route path="video">
                     <Route path=":id" element={<Video />} />
-                    <Route path="userInfo/:id" element={<UserInfo />} />
+                    <Route path="userInfo/:id" element={<UserInfo menuOpen={menuOpen}/>} />
                   </Route>
                 </Route>
               </Routes>

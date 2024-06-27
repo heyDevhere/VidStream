@@ -8,6 +8,8 @@ const Container = styled.div`
   flex-wrap: wrap;
   align-items:center;
   justify-content:center;
+  margin-left: ${(props) => (props.menuOpen ? '290px' : '0px')}; 
+
 `;
 
 const Title = styled.h3`
@@ -19,10 +21,10 @@ const Title = styled.h3`
 
 `;
 
-const Error = () => {
+const Error = ({menuOpen}) => {
   
   return (
-    <Container>
+    <Container menuOpen={menuOpen}>
       <Title>Enter Correct URL Please / Upload valid image,video</Title>
     </Container>
   );

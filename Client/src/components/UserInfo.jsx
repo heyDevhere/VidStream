@@ -11,6 +11,8 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+  margin-left: ${(props) => (props.menuOpen ? '290px' : '0px')}; 
+
 `;
 
 const Title = styled.h2`
@@ -22,7 +24,7 @@ const Title = styled.h2`
 
 
 
-const UserInfo = ({type}) => {
+const UserInfo = ({type,menuOpen}) => {
   const [videos, setVideos] = useState([]);
   const [userdata, setUserdata] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -61,7 +63,7 @@ const UserInfo = ({type}) => {
   return (
     <>
       <Title>Videos uploaded by {userdata.name}</Title>
-    <Container>
+    <Container menuOpen={menuOpen}>
       {videos && videos.map((video) => (
         <Card key={video._id} video={video}/>
       ))}
