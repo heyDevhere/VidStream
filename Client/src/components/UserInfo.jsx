@@ -4,7 +4,7 @@ import Card from "../components/Card";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
-
+import Loader from "./Loader";
 
 
 const Container = styled.div`
@@ -25,12 +25,14 @@ const Title = styled.h2`
 const UserInfo = ({type}) => {
   const [videos, setVideos] = useState([]);
   const [userdata, setUserdata] = useState([]);
+  const [loading, setLoading] = useState(true);
   const { currentUser } = useSelector((state) => state.user);
   const path = useLocation().pathname.split("/")[3];
   const location=useLocation();
 
   useEffect(() => {
     const fetchVideos = async () => {
+      try{
       const res = await axios.get(`https://vidstream-mfy7.onrender.com/api/users/get/userInfo/${path}`,{
         withCredentials: true // Include credentials in axios
       });
@@ -40,10 +42,22 @@ const UserInfo = ({type}) => {
       setUserdata(res2.data);
       console.log(res2.data);
       setVideos(res.data);
+      }
+      catch(err){
+
+      }
+      finally {
+        setLoading(false);
+      }
+
     };
     fetchVideos();
   }, [location]);
 
+  if (loading) {
+    return <Loader />;
+  }
+  
   return (
     <>
       <Title>Videos uploaded by {userdata.name}</Title>

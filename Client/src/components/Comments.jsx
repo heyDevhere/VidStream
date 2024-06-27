@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import Comment from "./Comment";
 import { toast } from "react-toastify";
+import Loader from "./Loader";
 
 const Container = styled.div``;
 
@@ -50,6 +51,8 @@ const Comments = ({ videoId }) => {
 
   const [newCommentText, setNewCommentText] = useState("");
   const [comments, setComments] = useState([]);
+  const [loading, setLoading] = useState(true);
+
 
   const onDelete = (commentId) => {
     const updatedComments = comments.filter(comment => comment._id !== commentId);
@@ -63,7 +66,13 @@ const Comments = ({ videoId }) => {
           withCredentials: true // Include credentials in axios
         });
         setComments(res.data);
-      } catch (err) {}
+      } catch (err) {
+
+      }
+      finally {
+        setLoading(false);
+      }
+
     };
     fetchComments();
   }, [videoId]);
@@ -87,6 +96,8 @@ const Comments = ({ videoId }) => {
       setNewCommentText("");
     } catch (err) {
       console.error(err);
+    }finally {
+      setLoading(false);
     }
   }
   else{
@@ -97,6 +108,11 @@ const Comments = ({ videoId }) => {
 
   //   //TODO: ADD NEW COMMENT FUNCTIONALITY
   const imgUrl = currentUser?.img || defaultImg;
+
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <Container>

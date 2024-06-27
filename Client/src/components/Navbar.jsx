@@ -20,22 +20,6 @@ import { useLocation } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import Tube from "../img/Capture-removebg-previews.png";
 
-// const Container = styled.div`
-//   position: sticky;
-//   top: 0;
-//   background-color: ${({ theme }) => theme.bgLighter};
-//   height: 56px;
-//   z-index: 1000; /* Ensure navbar stays on top */
-// `;
-
-// const User = styled.div`
-//   display: flex;
-//   align-items: center;
-//   gap: 10px;
-//   font-weight: 500;
-//   color: ${({ theme }) => theme.text};
-// `;
-
 const Dev = styled.div`
   cursor: pointer;
   display: flex;
@@ -45,86 +29,11 @@ const Dev = styled.div`
   color: ${({ theme }) => theme.text};
 `;
 
-// const Notifiy = styled.div`
-//   display: flex;
-//   align-items: center;
-//   margin: 0px 5px;
-//   font-weight: 500;
-//   color: ${({ theme }) => theme.text};
-//   z-index: 4000;
-// `;
-
-// const Avatar = styled.img`
-//   width: 32px;
-//   height: 32px;
-//   border-radius: 50%;
-//   background-color: #999;
-//   cursor: pointer;
-// `;
-
-// const Wrapper = styled.div`
-//   display: flex;
-//   align-items: center;
-//   justify-content: space-between;
-//   height: 100%;
-//   padding: 0px 20px;
-//   position: relative;
-// `;
-
-// const Search = styled.div`
-//   display: flex;
-//   align-items: center;
-//   justify-content: ${({ currentUser }) =>
-//     currentUser ? "flex-start" : "center"};
-//   flex-grow: 1;
-//   color: ${({ theme }) => theme.text};
-//   border-radius:2%;
-// `;
-
-// const Input = styled.input`
-//   border: 1px solid white;
-//   width: 220px;
-//   background-color: transparent;
-//   outline: none;
-//   margin: 2px 2px;
-//   height: 25px;
-//   color: ${({ theme }) => theme.text};
-//   border: 1px solid ${({ theme }) => theme.text};
-// `;
-
 const SearchIconWrapper = styled(SearchIcon)`
   color: ${({ theme }) => theme.text};
-  cursor:pointer;
+  cursor: pointer;
 `;
 
-// const Button = styled.button`
-//   padding: 5px 15px;
-//   background-color: transparent;
-//   border: 1px solid #3ea6ff;
-//   color: #3ea6ff;
-//   margin: 0px 2px;
-//   border-radius: 3px;
-//   font-weight: 500;
-//   cursor: pointer;
-//   display: flex;
-//   align-items: center;
-//   gap: 5px;
-// `;
-
-// const Badge = styled.div`
-//   position: absolute;
-//   bottom: 28px;
-//   /* right: ${({ currentUser }) => (currentUser ? "199px" : "145px")}; */
-//   background-color: red;
-//   color: ${({ theme }) => theme.text};
-//   border-radius: 50%;
-//   width: 20px;
-//   height: 20px;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   font-size: 12px;
-// `;
 const Container = styled.div`
   position: fixed;
   top: 0;
@@ -152,34 +61,40 @@ const Wrapper = styled.div`
 const Search = styled.div`
   display: flex;
   align-items: center;
-  justify-content: ${({ currentUser }) =>
-    currentUser ? "flex-start" : "center"};
-  flex-grow: 1;
-  color: ${({ theme }) => theme.text};
-  border-radius: 45%;
-  margin: 0 10px;
+  justify-content: center;
+  width: 300px;
+  margin: 0 auto;
 
   @media (max-width: 768px) {
-    margin: 10px 10px 10px 20px;
-    width: 100%;
-    /* justify-content: center; */
+    width: 50%;
+    margin: 10px auto;
   }
 `;
 
+const SearchContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background-color: ${({ theme }) => theme.bg};
+  border-radius: 25px;
+  padding: 5px 10px;
+  border: ${({ isFocused, theme }) => (isFocused ? `2px solid ${theme.text}` : 'none')}; // Conditional border
+
+`;
+
 const Input = styled.input`
-  border: 1px solid white;
-  width: 320px;
-  background-color: transparent;
+  border: none;
+  flex: 1;
   outline: none;
-  margin: 2px 2px;
-  height: 25px;
+  background-color: ${({ theme }) => theme.bg};
   color: ${({ theme }) => theme.text};
-  border: 1px solid ${({ theme }) => theme.text};
+  padding: 8px;
+  font-size: 16px;
+  
 
   @media (max-width: 768px) {
-    width: 80px;
-    width: ${({ currentUser }) =>
-    currentUser ? "80px" : "116px"};
+    width: 50%;
   }
 `;
 
@@ -246,8 +161,7 @@ const Notifiy = styled.div`
   align-items: center;
   margin: 0px 15px;
 
-  margin-right: ${({ currentUser }) =>
-    currentUser ? "50px" : "10px"};
+  margin-right: ${({ currentUser }) => (currentUser ? "50px" : "10px")};
 
   color: ${({ theme }) => theme.text};
   z-index: 4000;
@@ -255,8 +169,7 @@ const Notifiy = styled.div`
   @media (max-width: 768px) {
     /* align-items: flex-end; */
     /* left:240px; */
-    margin-right: ${({ currentUser }) =>
-    currentUser ? "80px" : "10px"};
+    margin-right: ${({ currentUser }) => (currentUser ? "80px" : "10px")};
   }
 `;
 
@@ -288,7 +201,6 @@ const Logo = styled.div`
   font-weight: bold;
   color: ${({ theme }) => theme.text};
 
-
   @media (max-width: 768px) {
     margin-left: 29px;
     .logo-text {
@@ -312,6 +224,7 @@ const Navbar = ({ toggleMenu, menuOpen }) => {
   const [notificationOpen, setNotificationOpen] = useState(false);
   const location = useLocation();
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 768);
+  const [isFocused, setIsFocused] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -329,37 +242,19 @@ const Navbar = ({ toggleMenu, menuOpen }) => {
     navigate("/");
   };
 
-  // useEffect(() => {
-  //   const fetchVideos = async () => {
-  //     if (currentUser) {
-  //       try {
-  //         const notifyres = await axios.get(`notify/getNotifications`);
-  //         const fetchedVideos = notifyres.data.flat(); // Flatten the array of arrays
-  //         const videoIds = fetchedVideos.map(notification => notification.videoId._id);
-  //         console.log("asiuefwh");
-  //         console.log(fetchedVideos);
-
-  //         const sortedVideos = fetchedVideos.sort(
-  //           (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-  //         );
-  //         setVideoCount(sortedVideos.length);
-  //       } catch (err) {
-  //         toast.error("No Notifications");
-  //       }
-  //       fetchVideos();
-  //     }
-  //   };
-  // }, []);
+  
 
   useEffect(() => {
     if (currentUser) {
       const fetchVideos = async () => {
         try {
           const notificationsResponse = await axios.get(
-            "https://vidstream-mfy7.onrender.com/api/notify/getNotifications",{
-              withCredentials: true 
-            });
-          if(!notificationsResponse.ok) console.log("shit");
+            "https://vidstream-mfy7.onrender.com/api/notify/getNotifications",
+            {
+              withCredentials: true,
+            }
+          );
+          if (!notificationsResponse.ok) console.log("shit");
           const notifications = await notificationsResponse.json();
 
           const videoIds = notifications.map(
@@ -368,9 +263,11 @@ const Navbar = ({ toggleMenu, menuOpen }) => {
 
           const videoDetailsPromises = videoIds.map((videoId) =>
             axios.get(
-              `https://vidstream-mfy7.onrender.com/api/videos/find/${videoId}`,{
-                withCredentials: true 
-              })
+              `https://vidstream-mfy7.onrender.com/api/videos/find/${videoId}`,
+              {
+                withCredentials: true,
+              }
+            )
           );
 
           const videoDetailsResponses = await Promise.all(videoDetailsPromises);
@@ -409,8 +306,6 @@ const Navbar = ({ toggleMenu, menuOpen }) => {
     } else {
       toast.error("login first!");
     }
-
-
   };
 
   const MenuIconWrapper = styled(MenuIcon)`
@@ -429,34 +324,34 @@ const Navbar = ({ toggleMenu, menuOpen }) => {
     <>
       <Container>
         <Wrapper>
-         
-            <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
-              <Logo>
-                <Img src={Tube} />
-                <span className="logo-text">VidStream</span>
-                </Logo>
-            </Link>
-          
+          <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+            <Logo>
+              <Img src={Tube} />
+              <span className="logo-text">VidStream</span>
+            </Logo>
+          </Link>
+
           <MenuIconWrapper onClick={toggleMenu} />
           {currentUser /* Conditionally render logout button */ && (
             <Button onClick={handleLogout}>Logout</Button>
           )}
 
           <Search>
-            <Input
-              placeholder="Search"
-              onChange={(e) => setQ(e.target.value)}
-              onKeyDown={handleKeyDown}
-            />
-            <SearchIconWrapper onClick={() => navigate(`/search?q=${q}`)} />
-          </Search>
-            <Notifiy>
-              <NotificationsIcon
-                sx={{ cursor: "pointer" }}
-                onClick={handleNot}
+            <SearchContainer isFocused={isFocused}>
+              <Input
+                placeholder="Search"
+                onChange={(e) => setQ(e.target.value)}
+                onKeyDown={handleKeyDown}
+                onFocus={() => setIsFocused(true)}
+                onBlur={() => setIsFocused(false)}
               />
-              {videoCount > 0 && { currentUser } && <Badge>{videoCount}</Badge>}
-            </Notifiy>
+              <SearchIconWrapper onClick={() => navigate(`/search?q=${q}`)} />
+            </SearchContainer>
+          </Search>
+          <Notifiy>
+            <NotificationsIcon sx={{ cursor: "pointer" }} onClick={handleNot} />
+            {videoCount > 0 && { currentUser } && <Badge>{videoCount}</Badge>}
+          </Notifiy>
 
           {notificationOpen && (
             <Notify

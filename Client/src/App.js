@@ -16,6 +16,7 @@ import MyTags from "./pages/MyTags";
 import Error from "./pages/Error";
 import BackToTop from "./components/BackToTop";
 import { useEffect } from "react";
+import HorizontalNav from "./components/HorizontalNav";
 
 const Container = styled.div`
   display: flex;
@@ -76,12 +77,13 @@ function App() {
             <Menu darkMode={darkMode} setDarkMode={setDarkMode} menuOpen={menuOpen} toggleMenu={toggleMenu} />
           <Main>
             <Navbar toggleMenu={toggleMenu} menuOpen={menuOpen} />
+            <HorizontalNav menuOpen={menuOpen}/>
             <Wrapper>
               <Routes>
                 <Route path="/">
-                  <Route index element={<Home type="random" />} />
-                  <Route path="trends" element={<Home type="trend" />} />
-                  <Route path="subscriptions" element={<Home type="sub" />} />
+                  <Route index element={<Home type="random" menuOpen={menuOpen}/>} />
+                  <Route path="trends" element={<Home type="trend" menuOpen={menuOpen}/>} />
+                  <Route path="subscriptions" element={<Home type="sub" menuOpen={menuOpen}/>} />
 
                   <Route path="music" element={<MyTags type="Music" />} />
                   <Route path="sports" element={<MyTags type="Sport" />} />
@@ -89,12 +91,6 @@ function App() {
                   <Route path="movies" element={<MyTags type="Movie" />} />
                   <Route path="news" element={<MyTags type="News" />} />
                   <Route path="*" element={<Error />} />
-
-
-
-
-
-
                   <Route path="history" element={<History />} />
                   <Route path="search" element={<Search />} />
                   <Route path="watchlater" element={<WatchLater />} />

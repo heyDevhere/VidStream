@@ -18,7 +18,6 @@ const app = express();
 // Use CORS middleware
 app.use(cors({
   origin: [
-    // "https://notaclone.netlify.app",
     "https://videocenter.netlify.app",
     "https://video-8c3ca.firebaseapp.com/__/auth/handler?apiKey=AIzaSyBc77MlQNQbhU4v-HPVyrV5SE79qD3EsAU&appName=%5BDEFAULT%5D&authType=signInViaPopup&redirectUrl=http%3A%2F%2Flocalhost%3A3000%2Fsignin&v=10.12.0&eventId=3604638201&providerId=google.com&scopes=profile"
   ],

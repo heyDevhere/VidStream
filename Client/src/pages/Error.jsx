@@ -23,7 +23,7 @@ const Error = () => {
   
   return (
     <Container>
-      <Title>Enter Correct URL Please / Upload valid image/video</Title>
+      <Title>Enter Correct URL Please / Upload valid image,video</Title>
     </Container>
   );
 };

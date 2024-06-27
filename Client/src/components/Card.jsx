@@ -19,6 +19,8 @@ const Container = styled.div`
   @media (max-width: 768px) {
     width: 100%;
     min-width:310px;
+    margin:auto;
+    margin-left: -10px;
     margin-bottom: ${(props) => (props.type === "sm" ? "15px" : "20px")};
 
   }

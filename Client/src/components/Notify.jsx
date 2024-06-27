@@ -10,6 +10,7 @@ import app from "../firebase";
 import { useDispatch } from "react-redux";
 import Notifycard from "./Notifycard";
 import { useLocation } from "react-router-dom";
+import Loader from "./Loader";
 
 const Container = styled.div`
   width: 100%;
@@ -94,6 +95,8 @@ const Notify = ({ setVideoCount, setNotificationOpen }) => {
   let i = 0;
   const [videos, setVideos] = useState([]);
   const [Notify, setNotify] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   const location=useLocation();
 
   useEffect(() => {
@@ -130,7 +133,10 @@ const Notify = ({ setVideoCount, setNotificationOpen }) => {
       } catch (e) {
         // toast.error("No Notifications available");
         console.log(e);
+      } finally {
+        setLoading(false);
       }
+  
     };
     fetchVideos();
   }, [location]);
@@ -169,7 +175,10 @@ const Notify = ({ setVideoCount, setNotificationOpen }) => {
     } catch (e) {
       // toast.error("No Notifications available");
       console.log("No Notifications available");
+    } finally {
+      setLoading(false);
     }
+
   };
 
   const removeVideo = (videoId) => {
@@ -177,6 +186,8 @@ const Notify = ({ setVideoCount, setNotificationOpen }) => {
     setVideos(updatedVideos);
     setVideoCount(updatedVideos.length);
   };
+
+
 
   return (
     <Container>

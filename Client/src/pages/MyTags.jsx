@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Card from "../components/Card";
+import Loader from "../components/Loader";
 
 const Container = styled.div`
   display: flex;
@@ -11,8 +12,10 @@ const Container = styled.div`
 
 const MyTags = ({ type}) => {
   const [videos, setVideos] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    try{
     const fetchVideos = async () => {
       const res = await axios.get(`https://vidstream-mfy7.onrender.com/api/videos/tags?tags=${type}`,{
         withCredentials: true // Include credentials in axios
@@ -20,7 +23,18 @@ const MyTags = ({ type}) => {
       setVideos(res.data);
     };
     fetchVideos();
+   }
+   catch (e) {}
+   finally{
+    setLoading(false);
+
+   }
   }, [type]);
+
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <Container>

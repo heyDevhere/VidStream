@@ -330,6 +330,7 @@ const Video = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+  
         const videoRes = await axios.get(
           `https://vidstream-mfy7.onrender.com/api/videos/find/${path}`,
           {
@@ -345,6 +346,7 @@ const Video = () => {
         console.log(videoRes.data);
         dispatch(fetchSuccess(videoRes.data));
         setVideo(videoRes.data);
+
         setChannel(channelRes.data);
       } catch (err) {
         console.log(err);
@@ -471,8 +473,8 @@ const Video = () => {
       dispatch(like(currentUser._id));
 
       // Compute the updated likes and dislikes
-      let updatedLikes = video.likes ?? 0;
-      let updatedDislikes = video.dislikes ?? 0;
+      let updatedLikes = video.likes.length ?? 0;
+      let updatedDislikes = video.dislikes.length ?? 0;
 
       const likesIndex = video.likes.indexOf(currentUser._id);
       const dislikesIndex = video.dislikes.indexOf(currentUser._id);
@@ -491,8 +493,8 @@ const Video = () => {
       // Update the video state
       setVideo((prev) => ({
         ...prev,
-        likes: updatedLikes,
-        dislikes: updatedDislikes,
+        likesDev: updatedLikes,
+        dislikesDev: updatedDislikes,
       }));
     } else {
       toast.error("Login to like the video");
@@ -513,8 +515,8 @@ const Video = () => {
       dispatch(dislike(currentUser._id));
 
       // Compute the updated likes and dislikes
-      let updatedLikes = video.likes ?? 0;
-      let updatedDislikes = video.dislikes ?? 0;
+      let updatedLikes = video.likes.length ?? 0;
+      let updatedDislikes = video.dislikes.length ?? 0;
 
       const likesIndex = video.likes.indexOf(currentUser._id);
       const dislikesIndex = video.dislikes.indexOf(currentUser._id);
@@ -533,8 +535,8 @@ const Video = () => {
       // Update the video state
       setVideo((prev) => ({
         ...prev,
-        likes: updatedLikes,
-        dislikes: updatedDislikes,
+        likesDev: updatedLikes,
+        dislikesDev: updatedDislikes,
       }));
     } else {
       toast.error("Login to dislike the video!");
@@ -582,7 +584,11 @@ const Video = () => {
                 ) : (
                   <ThumbUpOutlinedIcon />
                 )}{" "}
-                {video.likes?.length ?? 0}
+                {
+                video.likesDev !== undefined
+                  ? video.likesDev
+                  : (video.likes ? video.likes.length: 0)
+                }
               </Button>
             </LikeButton>
 
@@ -593,7 +599,10 @@ const Video = () => {
                 ) : (
                   <ThumbDownOffAltOutlinedIcon />
                 )}{" "}
-                {video.dislikes?.length ?? 0}
+                {video.dislikesDev !== undefined
+                  ? video.dislikesDev
+                  : (video.dislikes ? video.dislikes.length: 0)
+                }
               </Button>
             </DislikeButton>
             <Button>

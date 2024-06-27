@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Card from "../components/Card";
 import axios from "axios";
+import Loader from "./Loader";
 
 const Container = styled.div`
   display: flex;
@@ -11,8 +12,10 @@ const Container = styled.div`
 
 const History = ({type}) => {
   const [videos, setVideos] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    try{
     const fetchVideos = async () => {
       const res = await axios.get(`https://vidstream-mfy7.onrender.com/api/users/watchLater/`,{
         withCredentials: true // Include credentials in axios
@@ -21,7 +24,19 @@ const History = ({type}) => {
       setVideos(res.data);
     };
     fetchVideos();
+    }
+    catch(err){
+
+    }
+    finally{
+      setLoading(false);
+
+    }
   }, [type]);
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <Container>
