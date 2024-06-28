@@ -238,7 +238,7 @@ const Upload = ({ setOpen,setNotificationOpen,setVideoCount }) => {
       if (video && inputs.title && inputs.desc && tags.length>0) {
     
   
-        const res = await axios.post(`https://vidstream-mfy7.onrender.com/api/videos/`, { ...inputs, tags }, {}, {
+        const res = await axios.post(`https://vidstream-mfy7.onrender.com/api/videos/`, { ...inputs, tags },{
           withCredentials: true // Include credentials in axios
         });
         if(res.data=="You are not authenticated!") toast.error("You are not authenticated! , login again!")
