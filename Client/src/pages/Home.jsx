@@ -19,7 +19,7 @@ const Container = styled.div`
 `;
 
 
-const Home = ({type,menuOpen}) => {
+const Home = ({type,menuOpen,toggleMenu}) => {
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -52,7 +52,7 @@ const Home = ({type,menuOpen}) => {
     <Container menuOpen={menuOpen}>
       {videos.map((video) => (
 
-        <Card key={video._id} video={video}/>
+        <Card key={video._id} video={video} menuOpen={menuOpen} toggleMenu={toggleMenu} />
       ))}
     </Container>
   );

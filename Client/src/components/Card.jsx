@@ -93,7 +93,7 @@ const scrollToTop = () => {
   });
 };
 
-const Card = ({ type,video}) => {
+const Card = ({ type,video,menuOpen,toggleMenu}) => {
   const [channel, setChannel] = useState({});
   const { currentUser } = useSelector((state) => state.user);
 
@@ -111,6 +111,8 @@ const Card = ({ type,video}) => {
 
   const handleClick = async () => {
     scrollToTop();
+    toggleMenu(false); // Close the menu
+
 
     if(currentUser){
       try {

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Avatar, Box } from "@mui/material";
 import styled from "styled-components";
+import { Link, Navigate } from "react-router-dom";
 
 const Subscriptions = () => {
   const [subscribedUsers, setSubscribedUsers] = useState([]);
@@ -53,52 +54,20 @@ const Subscriptions = () => {
     }
   `;
 
-  const StyledBox = styled(Box)`
-    width: 150px;
-    padding: 10px;
-    border-radius: 8px;
-    margin-right: 20px;
-  `;
 
-  const StyledList = styled.div`
-    padding: 0;
-  `;
-
-  const StyledListItem = styled.div`
-    padding: 10px;
-    display: flex;
-    align-items: center;
-    gap: 20px;
+  const Container = styled.div`
+    margin-bottom: ${(props) => (props.type === "sm" ? "10px" : "25px")};
+    width: 100%;
+    max-width: 350px;
+    margin-top: auto;
     cursor: pointer;
-    padding: 20px;
-    margin-left: -15px;
-    background-color: ${({ theme }) => theme.bgLighter};
-  `;
+    padding-right: 10px;
+    display: ${(props) => props.type === "sm" && "flex"};
+    gap: 10px;
+    /* margin-bottom: ${(props) => (props.type === "sm" ? "2px" : "20px")}; */
 
-  const StyledAvatar = styled(Avatar)`
-    margin-top:-2px;
-    border-radius: 50%;
-  `;
-
-  const UserName = styled.span`
-    font-size: large;
-    font-weight: bold;
-    color: ${({ theme }) => theme.text};
-  `;
-
-
-const Container = styled.div`
-  margin-bottom: ${(props) => (props.type === "sm" ? "10px" : "25px")};
-  width: ${(props) => props.type !== "sm" && "350px"};
-  margin-top: auto;
-  cursor: pointer;
-  margin-right:2px;
-  display: ${(props) => props.type === "sm" && "flex"};
-  gap: 10px;
-      /* margin-bottom: ${(props) => (props.type === "sm" ? "2px" : "20px")}; */
-
-  flex-direction: column;
-  /* @media (max-width: 768px) {
+    flex-direction: column;
+    /* @media (max-width: 768px) {
     width: 100%;
     min-width:310px;
     margin:auto;
@@ -106,45 +75,57 @@ const Container = styled.div`
     margin-bottom: ${(props) => (props.type === "sm" ? "15px" : "20px")};
 
   } */
-`;
+  `;
 
-const Details = styled.div`
-  display: flex;
-  margin-top: ${(props) => props.type !== "sm" && "16px"};
-  gap: 12px;
-  flex: 1;
-  
-`;
-
-const ChannelImage = styled.img`
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background-color: #999;
-  display: ${(props) => props.type === "sm" && "none"};
-`;
-
-const Texts = styled.div``;
+  const Details = styled.div`
+    display: flex;
+    margin-top: ${(props) => props.type !== "sm" && "16px"};
+    gap: 12px;
+    align-items: center; /* Align items vertically in the center */
+    flex: 1;
+    box-sizing: border-box; /* Include padding and border in element's total width */
+    padding: 5px; /* Add padding for better spacing */
+    border-radius: 8px; /* Add border radius for rounded corners */
 
 
+    &:hover {
+      background-color: ${({ theme }) => theme.soft};
+      cursor: pointer;
+      margin-right: auto;
+    }
+  `;
 
-const ChannelName = styled.h2`
-  font-size: 14px;
-  color: ${({ theme }) => theme.text};
-  margin: 9px 0px;
-`;
+  const ChannelImage = styled.img`
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #999;
+    display: ${(props) => props.type === "sm" && "none"};
+  `;
+
+  const Texts = styled.div``;
+
+  const ChannelName = styled.h2`
+    font-size: 14px;
+    color: ${({ theme }) => theme.text};
+    margin: 9px 0px;
+  `;
 
   return (
-    <Container >
+    <Container>
       <Items>Subscriptions</Items>
 
       {subscribedUsersImage.map((user) => (
-        <Details key={user.id}>
-          <ChannelImage src={user.img} />
-          <Texts>
-            <ChannelName>{user.name}</ChannelName>
-          </Texts>
-        </Details>
+        <Link to={`/video/userInfo/${user._id}`}
+        style={{ textDecoration: "none", color: "inherit" }}
+        >
+          <Details key={user._id}>
+            <ChannelImage src={user.img} />
+            <Texts>
+              <ChannelName>{user.name}</ChannelName>
+            </Texts>
+          </Details>
+        </Link>
       ))}
     </Container>
   );

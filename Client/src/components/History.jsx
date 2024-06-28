@@ -12,7 +12,7 @@ const Container = styled.div`
 
 `;
 
-const History = ({type,menuOpen}) => {
+const History = ({type,menuOpen,toggleMenu}) => {
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -41,7 +41,7 @@ const History = ({type,menuOpen}) => {
   return (
     <Container menuOpen={menuOpen}>
       {videos.map((video) => (
-        <Card key={video._id} video={video}/>
+        <Card key={video._id} video={video} menuOpen={menuOpen} toggleMenu={toggleMenu}/>
       ))}
     </Container>
   );

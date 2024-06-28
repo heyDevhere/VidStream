@@ -81,24 +81,23 @@ function App() {
             <Wrapper>
               <Routes>
                 <Route path="/">
-                  <Route index element={<Home type="random" menuOpen={menuOpen}/>} />
-                  <Route path="trends" element={<Home type="trend" menuOpen={menuOpen}/>} />
-                  <Route path="subscriptions" element={<Home type="sub" menuOpen={menuOpen}/>} />
-
-                  <Route path="music" element={<MyTags type="Music" menuOpen={menuOpen}/>} />
-                  <Route path="sports" element={<MyTags type="Sport" menuOpen={menuOpen}/>} />
-                  <Route path="gaming" element={<MyTags type="Game" menuOpen={menuOpen}/>} />
-                  <Route path="movies" element={<MyTags type="Movie" menuOpen={menuOpen}/>} />
-                  <Route path="news" element={<MyTags type="News" menuOpen={menuOpen}/>} />
-                  <Route path="*" element={<Error  menuOpen={menuOpen}/>} />
-                  <Route path="history" element={<History menuOpen={menuOpen}/>} />
-                  <Route path="search" element={<Search  menuOpen={menuOpen} />} />
-                  <Route path="watchlater" element={<WatchLater menuOpen={menuOpen}/>} />
+                  <Route index element={<Home type="random" menuOpen={menuOpen} toggleMenu={toggleMenu}/>} />
+                  <Route path="trends" element={<Home type="trend" menuOpen={menuOpen} toggleMenu={toggleMenu}/>} />
+                  <Route path="subscriptions" element={<Home type="sub" menuOpen={menuOpen} toggleMenu={toggleMenu}/>} />
+                  <Route path="music" element={<MyTags type="Music" menuOpen={menuOpen} toggleMenu={toggleMenu}/>} />
+                  <Route path="sports" element={<MyTags type="Sport" menuOpen={menuOpen} toggleMenu={toggleMenu}/>} />
+                  <Route path="gaming" element={<MyTags type="Game" menuOpen={menuOpen} toggleMenu={toggleMenu}/>} />
+                  <Route path="movies" element={<MyTags type="Movie" menuOpen={menuOpen} toggleMenu={toggleMenu}/>} />
+                  <Route path="news" element={<MyTags type="News" menuOpen={menuOpen} toggleMenu={toggleMenu}/>} />
+                  <Route path="*" element={<Error  menuOpen={menuOpen} toggleMenu={toggleMenu}/>} />
+                  <Route path="history" element={<History menuOpen={menuOpen} toggleMenu={toggleMenu}/>} />
+                  <Route path="search" element={<Search  menuOpen={menuOpen} toggleMenu={toggleMenu}/>} />
+                  <Route path="watchlater" element={<WatchLater menuOpen={menuOpen} toggleMenu={toggleMenu}/>} />
 
                   <Route path="signin" element={<SignIn />} />
                   <Route path="video">
-                    <Route path=":id" element={<Video />} />
-                    <Route path="userInfo/:id" element={<UserInfo menuOpen={menuOpen}/>} />
+                    <Route path=":id" element={<Video menuOpen={menuOpen} toggleMenu={toggleMenu}/>} />
+                    <Route path="userInfo/:id" element={<UserInfo menuOpen={menuOpen} toggleMenu={toggleMenu}/>} />
                   </Route>
                 </Route>
               </Routes>

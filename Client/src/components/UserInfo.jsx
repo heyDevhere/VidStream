@@ -19,12 +19,13 @@ const Title = styled.h2`
   text-align: center;
   color: ${({ theme }) => theme.text};
   margin-bottom: 15px;
+  margin-left: ${({ menuOpen }) => (menuOpen ? '20px' : '0')}; /* Adjust margin-left conditionally */
 
 `;
 
 
 
-const UserInfo = ({type,menuOpen}) => {
+const UserInfo = ({type,menuOpen,toggleMenu}) => {
   const [videos, setVideos] = useState([]);
   const [userdata, setUserdata] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -62,10 +63,10 @@ const UserInfo = ({type,menuOpen}) => {
   
   return (
     <>
-      <Title>Videos uploaded by {userdata.name}</Title>
+      <Title menuOpen={menuOpen}>Videos uploaded by {userdata.name}</Title>
     <Container menuOpen={menuOpen}>
       {videos && videos.map((video) => (
-        <Card key={video._id} video={video}/>
+        <Card key={video._id} video={video} menuOpen={menuOpen} toggleMenu={toggleMenu} />
       ))}
     </Container>
     </>
