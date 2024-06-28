@@ -254,7 +254,14 @@ const Navbar = ({ toggleMenu, menuOpen }) => {
               withCredentials: true,
             }
           );
-          if (!notificationsResponse.ok) console.log("shit");
+
+          if (notificationsResponse.status !== 200) {
+            console.log("shit");
+          } else {
+            console.log("Notifications fetched successfully", notificationsResponse.data);
+          }
+
+          
           const notifications = await notificationsResponse.json();
 
           const videoIds = notifications.map(

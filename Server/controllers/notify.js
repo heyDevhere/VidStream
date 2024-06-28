@@ -14,7 +14,6 @@ export const getUserNotifications = async (req, res, next) => {
   } catch (err) {
     console.error(err);
     res.status(500).send("Server Error");
-
     next(createError(500, "Failed to fetch notifications"));
   }
 };
