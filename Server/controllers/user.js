@@ -210,6 +210,18 @@ export const getUploadedVideos = async (req, res, next) => {
 
 };
 
+export const getSubUser = async (req, res, next) => {
+  try {
+    const user = await User.findByIdAndUpdate(req.user.id);
+    const subscribedUsers = user.subscribedUsers;
+    res.status(200).json(subscribedUsers);
+  } catch (err) {
+    next(err);
+  }
+};
+
+
+
 
 export const getUser = async (req, res, next) => {
   try {

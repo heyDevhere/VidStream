@@ -24,6 +24,9 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
+import { List, ListItem, ListItemAvatar, ListItemText, Avatar, Typography, Box } from '@mui/material';
+import Subscriptions from "./Subscriptions";
+
 
 import { toast } from "react-toastify";
 
@@ -115,6 +118,21 @@ const Item = styled.div`
   }
 `;
 
+
+const Items = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  cursor: pointer;
+  padding: 7.5px 0px;
+  font-size: large;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.soft};
+  }
+`;
+
+
 const Hr = styled.hr`
   margin: 15px 0px;
   border: 0.5px solid ${({ theme }) => theme.soft};
@@ -129,6 +147,7 @@ const Button = styled.button`
   border-radius: 3px;
   font-weight: 500;
   margin-top: 10px;
+  margin-bottom: 10px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -272,13 +291,19 @@ const Menu = ({ darkMode, setDarkMode, menuOpen, toggleMenu }) => {
             </Link>
           </Login>
         )}
-        <Hr />
 
         {/* <Title>BEST OF LAMATUBE</Title> */}
         <Item onClick={fordev}>
           <SettingsBrightnessOutlinedIcon />
           {darkMode ? "Light" : "Dark"} Mode
         </Item>
+
+        <Hr />
+
+        
+
+        <Subscriptions/>
+
         <Link
           to="/music"
           style={{ textDecoration: "none", color: "inherit" }}
@@ -330,27 +355,7 @@ const Menu = ({ darkMode, setDarkMode, menuOpen, toggleMenu }) => {
           </Item>
         </Link>
 
-        <Item>
-          {/* <FlagOutlinedIcon />
-          Report */}
-        </Item>
-        {/* <Item>
-          <LiveTvOutlinedIcon />
-          Live
-        </Item>
-        <Hr />
-        <Item>
-          <SettingsOutlinedIcon />
-          Settings
-        </Item>
-        <Item>
-          <FlagOutlinedIcon />
-          Report
-        </Item>
-        <Item>
-          <HelpOutlineOutlinedIcon />
-          Help
-        </Item>  */}
+        
       </Wrapper>
     </Container>
   );

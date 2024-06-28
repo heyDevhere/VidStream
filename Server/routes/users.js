@@ -13,6 +13,7 @@ import {
   updateUploadVideos,
   getUploadedVideos,
   getUsersWithVideos,
+  getSubUser,
 } from "../controllers/user.js";
 import { verifyToken } from "../verifyToken.mjs";
 
@@ -32,6 +33,8 @@ router.get("/getuserswithuvideos",getUsersWithVideos);
 router.get("/history",verifyToken,getClickedVideos);
 
 router.get("/watchLater",verifyToken,getWatchLaterVideos);
+
+router.get("/subscribers",verifyToken,getSubUser);
 
 //delete user
 router.delete("/:id", verifyToken, deleteUser);

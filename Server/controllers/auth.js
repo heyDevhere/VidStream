@@ -43,7 +43,7 @@ export const signin = async (req, res, next) => {
       expires: new Date(Date.now() + 25892000000), // Adjust expiry time as needed
       httpOnly: true,
       secure: true, // Should be true in production
-      sameSite: 'None' // Use 'None' if dealing with cross-domain requests
+      sameSite: 'none' // Use 'None' if dealing with cross-domain requests
     }).status(200).json(others)
 
 
@@ -69,7 +69,7 @@ export const googleAuth = async (req, res, next) => {
         expires: new Date(Date.now() + 25892000000), // Adjust expiry time as needed
         httpOnly: true,
         secure: true, // Should be true in production
-        sameSite: 'None' // Use 'None' if dealing with cross-domain requests
+        sameSite: 'none' // Use 'None' if dealing with cross-domain requests
       })
         .status(200)
         .json(user._doc);
@@ -87,7 +87,7 @@ export const googleAuth = async (req, res, next) => {
         expires: new Date(Date.now() + 25892000000), // Adjust expiry time as needed
         httpOnly: true,
         secure: true, // Should be true in production
-        sameSite: 'None' // Use 'None' if dealing with cross-domain requests
+        sameSite: 'none' // Use 'None' if dealing with cross-domain requests
       })
         .status(200)
         .json(savedUser._doc);

@@ -27,6 +27,8 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   color: ${({ theme }) => theme.text};
+
+  
 `;
 
 const Wrapper = styled.div`
@@ -36,7 +38,13 @@ const Wrapper = styled.div`
   background-color: ${({ theme }) => theme.bgLighter};
   border: 1px solid ${({ theme }) => theme.soft};
   padding: 20px 50px;
+  margin-left: 150px;
   gap: 10px;
+  @media (max-width: 768px) {
+    margin-right:13px;
+    margin-left: 0px;
+
+  }
 `;
 
 const Title = styled.h1`
@@ -46,6 +54,10 @@ const Title = styled.h1`
 const SubTitle = styled.h2`
   font-size: 20px;
   font-weight: 300;
+  @media (max-width: 768px) {
+    text-align: center;
+  }
+
 `;
 
 const Input = styled.input`
@@ -80,6 +92,7 @@ const Links = styled.div`
 
 const Link = styled.span`
   margin-left: 30px;
+  
 `;
 
 const SignIn = () => {
