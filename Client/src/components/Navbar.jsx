@@ -261,12 +261,13 @@ const Navbar = ({ toggleMenu, menuOpen }) => {
             console.log("Notifications fetched successfully", notificationsResponse.data);
           }
 
-          
-          const notifications = await notificationsResponse.json();
 
-          const videoIds = notifications.map(
+          // const notifications = await notificationsResponse.json();
+          const notifications = notificationsResponse.data;
+
+          const videoIds = Array.from(new Set(notifications.map(
             (notification) => notification.videoId._id
-          );
+          )));
 
           const videoDetailsPromises = videoIds.map((videoId) =>
             axios.get(

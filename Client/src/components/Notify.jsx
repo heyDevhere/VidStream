@@ -106,11 +106,11 @@ const Notify = ({ setVideoCount, setNotificationOpen }) => {
           "https://vidstream-mfy7.onrender.com/api/notify/getNotifications",{
             withCredentials: true 
           });
-        const notifications = await notificationsResponse.json();
+        const notifications = notificationsResponse.data;
 
-        const videoIds = notifications.map(
+        const videoIds = Array.from(new Set(notifications.map(
           (notification) => notification.videoId._id
-        );
+        )));
 
         const NotifyIds = notifications.map(
           (notification) => notification._id
@@ -148,11 +148,11 @@ const Notify = ({ setVideoCount, setNotificationOpen }) => {
         "https://vidstream-mfy7.onrender.com/api/notify/getNotifications",{
           withCredentials: true 
         });
-      const notifications = await notificationsResponse.json();
+      const notifications = notificationsResponse.data;
 
-      const videoIds = notifications.map(
+      const videoIds = Array.from(new Set(notifications.map(
         (notification) => notification.videoId._id
-      );
+      )));
 
       const NotifyIds = notifications.map(
         (notification) => notification._id
