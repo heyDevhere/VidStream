@@ -24,9 +24,16 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { List, ListItem, ListItemAvatar, ListItemText, Avatar, Typography, Box } from '@mui/material';
+import {
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+  Avatar,
+  Typography,
+  Box,
+} from "@mui/material";
 import Subscriptions from "./Subscriptions";
-
 
 import { toast } from "react-toastify";
 
@@ -102,6 +109,10 @@ const Logo = styled.div`
   margin-bottom: 25px;
 `;
 
+const Wrappers = styled.div`
+  margin-top: -20px;
+`;
+
 const Img = styled.img`
   height: 25px;
 `;
@@ -118,7 +129,6 @@ const Item = styled.div`
   }
 `;
 
-
 const Items = styled.div`
   display: flex;
   align-items: center;
@@ -131,7 +141,6 @@ const Items = styled.div`
     background-color: ${({ theme }) => theme.soft};
   }
 `;
-
 
 const Hr = styled.hr`
   margin: 15px 0px;
@@ -300,9 +309,11 @@ const Menu = ({ darkMode, setDarkMode, menuOpen, toggleMenu }) => {
 
         <Hr />
 
-        
-
-        <Subscriptions/>
+        {currentUser && (
+          <Wrappers>
+            <Subscriptions />
+          </Wrappers>
+        )}
 
         <Link
           to="/music"
@@ -354,8 +365,6 @@ const Menu = ({ darkMode, setDarkMode, menuOpen, toggleMenu }) => {
             News
           </Item>
         </Link>
-
-        
       </Wrapper>
     </Container>
   );
