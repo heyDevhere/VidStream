@@ -191,8 +191,8 @@ const Badge = styled.div`
   font-size: 12px;
 
   @media (max-width: 768px) {
-    bottom: 20px;
-    right: 10px;
+    bottom: 28px;
+    right: 110px;
   }
 `;
 
