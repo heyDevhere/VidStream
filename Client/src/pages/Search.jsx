@@ -6,33 +6,34 @@ import Card from "../components/Card";
 import Loader from "../components/Loader";
 
 const Container = styled.div`
-  
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  margin-left: ${(props) => (props.menuOpen ? '290px' : '0px')}; 
+  margin-left: ${(props) => (props.menuOpen ? "290px" : "0px")};
+  margin-top: 55px;
 
+  @media (max-width: 768px) {
+    margin-top: 50px;
+  }
 `;
 
-const Search = ({menuOpen}) => {
+const Search = ({ menuOpen }) => {
   const [videos, setVideos] = useState([]);
   const query = useLocation().search;
   const [loading, setLoading] = useState(true);
 
-
-
   useEffect(() => {
     const fetchVideos = async () => {
-      try{
-      const res = await axios.get(`https://vidstream-mfy7.onrender.com/api/videos/search${query}`,{
-        withCredentials: true // Include credentials in axios
-      });
-      setVideos(res.data);
-      }
-      catch(error){
-
-      }
-      finally{
+      try {
+        const res = await axios.get(
+          `https://vidstream-mfy7.onrender.com/api/videos/search${query}`,
+          {
+            withCredentials: true, // Include credentials in axios
+          }
+        );
+        setVideos(res.data);
+      } catch (error) {
+      } finally {
         setLoading(false);
       }
     };
@@ -43,12 +44,13 @@ const Search = ({menuOpen}) => {
     return <Loader />;
   }
 
-  return <Container menuOpen={menuOpen}>
-    {videos.map(video=>(
-      <Card key={video._id} video={video}/>
-    ))}
-  </Container>;
+  return (
+    <Container menuOpen={menuOpen}>
+      {videos.map((video) => (
+        <Card key={video._id} video={video} />
+      ))}
+    </Container>
+  );
 };
 
 export default Search;
-
