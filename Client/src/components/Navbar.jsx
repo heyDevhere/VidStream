@@ -68,7 +68,7 @@ const Search = styled.div`
 
   @media (max-width: 768px) {
     width: 50%;
-    left:9px;
+    left: 9px;
   }
 `;
 
@@ -80,9 +80,9 @@ const SearchContainer = styled.div`
   background-color: ${({ theme }) => theme.bg};
   border-radius: 25px;
   padding: 5px 10px;
-  border: ${({ isFocused, theme }) => (isFocused ? `2px solid ${theme.text}` : 'none')}; // Conditional border
-  margin:auto;
-
+  border: ${({ isFocused, theme }) =>
+    isFocused ? `2px solid ${theme.text}` : "none"}; // Conditional border
+  margin: auto;
 `;
 
 const Input = styled.input`
@@ -93,7 +93,6 @@ const Input = styled.input`
   color: ${({ theme }) => theme.text};
   padding: 8px;
   font-size: 16px;
-  
 
   @media (max-width: 768px) {
     width: 48px;
@@ -163,7 +162,7 @@ const Notifiy = styled.div`
   align-items: center;
   margin: 0px 15px;
 
-  margin-right: ${({ currentUser }) => (currentUser ? "50px" : "10px")};
+  /* margin-right: ${({ currentUser }) => (currentUser ? "50px" : "10px")}; */
 
   color: ${({ theme }) => theme.text};
   z-index: 4000;
@@ -173,7 +172,6 @@ const Notifiy = styled.div`
     /* left:240px; */
     margin-right: ${({ currentUser }) => (currentUser ? "80px" : "10px")};
     z-index: 4000;
-
   }
 `;
 
@@ -244,9 +242,8 @@ const Navbar = ({ toggleMenu, menuOpen }) => {
   const handleLogout = () => {
     dispatch(logout());
     navigate("/");
+    window.location.reload();
   };
-
-  
 
   useEffect(() => {
     if (currentUser) {
@@ -262,16 +259,20 @@ const Navbar = ({ toggleMenu, menuOpen }) => {
           if (notificationsResponse.status !== 200) {
             console.log("shit");
           } else {
-            console.log("Notifications fetched successfully", notificationsResponse.data);
+            console.log(
+              "Notifications fetched successfully",
+              notificationsResponse.data
+            );
           }
-
 
           // const notifications = await notificationsResponse.json();
           const notifications = notificationsResponse.data;
 
-          const videoIds = Array.from(new Set(notifications.map(
-            (notification) => notification.videoId._id
-          )));
+          const videoIds = Array.from(
+            new Set(
+              notifications.map((notification) => notification.videoId._id)
+            )
+          );
 
           const videoDetailsPromises = videoIds.map((videoId) =>
             axios.get(
@@ -298,8 +299,13 @@ const Navbar = ({ toggleMenu, menuOpen }) => {
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
-      navigate(`/search?q=${q}`);
+      handleSearch();
     }
+  };
+
+  const handleSearch = () => {
+    navigate(`/search?q=${q}`);
+    setQ(''); // Reset q to an empty string
   };
 
   // this returns a object literal
@@ -357,12 +363,18 @@ const Navbar = ({ toggleMenu, menuOpen }) => {
                 onFocus={() => setIsFocused(true)}
                 onBlur={() => setIsFocused(false)}
               />
-              <SearchIconWrapper onClick={() => navigate(`/search?q=${q}`)} />
+              <SearchIconWrapper  onClick={handleSearch} />
             </SearchContainer>
           </Search>
           <Notifiy>
             <NotificationsIcon sx={{ cursor: "pointer" }} onClick={handleNot} />
-            {videoCount > 0 && { currentUser } && <Badge>{videoCount}</Badge>}
+            {videoCount > 0 && { currentUser } && 
+        
+            <Badge>{videoCount}</Badge>
+
+            }
+
+         
           </Notifiy>
 
           {notificationOpen && (

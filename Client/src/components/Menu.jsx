@@ -194,6 +194,8 @@ const Menu = ({ darkMode, setDarkMode, menuOpen, toggleMenu }) => {
     }
     dispatch(logout());
     navigate("/");
+    window.location.reload();
+
   };
 
   const handleSubscriptionClick = (e) => {
