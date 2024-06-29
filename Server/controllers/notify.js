@@ -24,7 +24,7 @@ export const deleteNotification = async (req, res, next) => {
 
   try {
     // Find and delete the notification by videoId
-    const result = await Notification.deleteMany({ "videoId._id": vId});
+    const result = await Notification.deleteOne({ "videoId._id": vId});
 
     if (result.deletedCount === 0) {
       return res.status(404).send({ message: 'Notification not found' });

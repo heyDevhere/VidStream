@@ -134,7 +134,7 @@ const Label = styled.label`
   margin: 15px 5px;
 `;
 
-const Upload = ({ setOpen,setNotificationOpen,setVideoCount }) => {
+const Upload = ({ setOpen,setNotificationOpen,setVideoCount,toggleMenu,menuOpen }) => {
   const navigate = useNavigate();
   const [img, setImg] = useState(undefined);
   const [video, setVideo] = useState(undefined);
@@ -251,6 +251,10 @@ const Upload = ({ setOpen,setNotificationOpen,setVideoCount }) => {
         const res2 = await axios.put(`https://vidstream-mfy7.onrender.com/api/users/userInfo/${res.data._id}`, {}, {
           withCredentials: true // Include credentials in axios
         });
+
+        toggleMenu(!menuOpen);
+
+
         // setNotificationOpen(true);
         // setVideoCount(prevCount => prevCount + 1); 
 

@@ -160,7 +160,6 @@ const Notify = ({ setVideoCount, setNotificationOpen }) => {
 
       setNotify(NotifyIds);
 
-
       const videoDetailsPromises = videoIds.map(videoId =>
         axios.get(`https://vidstream-mfy7.onrender.com/api/videos/find/${videoId}`, {
           withCredentials: true // Include credentials in axios
@@ -216,7 +215,6 @@ const Notify = ({ setVideoCount, setNotificationOpen }) => {
               setNotificationOpen={setNotificationOpen}
               setNotify={setNotify}
               //   onClick={() => removeVideo(video._id)}
-                onClick={() => fetchVideos()}
             />
           ))
         ) : (

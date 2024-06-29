@@ -400,6 +400,8 @@ const Navbar = ({ toggleMenu, menuOpen }) => {
           setOpen={setOpen}
           setNotificationOpen={setNotificationOpen}
           setVideoCount={setVideoCount}
+          toggleMenu={toggleMenu}
+          menuOpen={menuOpen}
         />
       )}
     </>
