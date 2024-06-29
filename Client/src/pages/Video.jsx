@@ -27,6 +27,8 @@ import { useRef } from "react";
 const Container = styled.div`
   display: flex;
   gap: 24px;
+  margin-top: 55px;
+
   @media (max-width: 768px) {
     flex-direction: column;
   }
@@ -157,6 +159,7 @@ const VideoFrame = styled.video`
   z-index: 100;
   position: sticky;
   top: 0;
+  border-radius: 12px;
 `;
 
 const WatchButton = styled.div`

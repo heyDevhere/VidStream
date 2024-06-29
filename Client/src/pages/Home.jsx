@@ -9,6 +9,7 @@ const Container = styled.div`
   justify-content: space-between;
   flex-wrap: wrap;
   margin-left: ${(props) => (props.menuOpen ? '290px' : '0px')}; 
+  margin-top: 55px;
 
   transition: margin-left 0.3s ease;
   @media (max-width: 768px) {

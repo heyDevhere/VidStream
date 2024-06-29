@@ -252,9 +252,6 @@ const Upload = ({ setOpen,setNotificationOpen,setVideoCount,toggleMenu,menuOpen 
           withCredentials: true // Include credentials in axios
         });
 
-        toggleMenu(!menuOpen);
-
-
         // setNotificationOpen(true);
         // setVideoCount(prevCount => prevCount + 1); 
 

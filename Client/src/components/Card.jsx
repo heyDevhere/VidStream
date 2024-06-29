@@ -111,7 +111,9 @@ const Card = ({ type,video,menuOpen,toggleMenu}) => {
 
   const handleClick = async () => {
     scrollToTop();
+    if(menuOpen==true){
     toggleMenu(false); // Close the menu
+    }
 
 
     if(currentUser){

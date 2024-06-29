@@ -9,6 +9,8 @@ const Container = styled.div`
   align-items:center;
   justify-content:center;
   margin-left: ${(props) => (props.menuOpen ? '290px' : '0px')}; 
+  margin-top: 55px;
+
 
 `;
 

@@ -9,6 +9,8 @@ const Container = styled.div`
   justify-content: space-between;
   flex-wrap: wrap;
   margin-left: ${(props) => (props.menuOpen ? '290px' : '0px')}; 
+  margin-top: 55px;
+
 `;
 
 const History = ({type,menuOpen,toggleMenu}) => {

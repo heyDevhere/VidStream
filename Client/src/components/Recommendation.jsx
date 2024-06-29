@@ -5,7 +5,10 @@ import Card from "./Card";
 import Loader from "./Loader";
 
 const Container = styled.div`
+
   flex: 2;
+  margin-top: 55px;
+
 `;
 
 const Recommendation = ({ tags , excludeId}) => {
