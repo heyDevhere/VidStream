@@ -7,7 +7,9 @@ import Loader from "./Loader";
 const Container = styled.div`
 
   flex: 2;
-  margin-top: 55px;
+  @media (max-width: 768px) {
+    margin-top: 35px;
+  }
 
 `;
 

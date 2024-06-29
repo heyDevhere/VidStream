@@ -23,9 +23,11 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   z-index: 2000;
+
   @media (max-width: 768px) {
-    align-items: flex-end;
-    justify-content: flex-end;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
 
   }
 `;
@@ -34,6 +36,7 @@ const Scrollbar = styled.div``;
 
 const Title = styled.h2`
   text-align: center;
+
 `;
 
 const Wrapper = styled.div`

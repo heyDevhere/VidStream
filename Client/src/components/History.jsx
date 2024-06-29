@@ -10,7 +10,9 @@ const Container = styled.div`
   flex-wrap: wrap;
   margin-left: ${(props) => (props.menuOpen ? '290px' : '0px')}; 
   margin-top: 55px;
-
+  @media (max-width: 768px) {
+    margin-top: 40px;
+  }
 
 `;
 

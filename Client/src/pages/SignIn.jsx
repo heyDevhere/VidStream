@@ -27,6 +27,11 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   color: ${({ theme }) => theme.text};
+  margin-top: 55px;
+  @media (max-width: 768px) {
+    margin-top: 80px;
+
+  }
 
   
 `;
@@ -40,9 +45,14 @@ const Wrapper = styled.div`
   padding: 20px 50px;
   margin-left: 150px;
   gap: 10px;
+  border-color: ${({ theme }) => theme.textSoft}; // Change this to your desired color
+
   @media (max-width: 768px) {
-    margin-right:13px;
-    margin-left: 0px;
+    width:60%;
+     margin-left: 12px;
+    margin-right:20px; 
+
+
 
   }
 `;
@@ -67,6 +77,12 @@ const Input = styled.input`
   background-color: transparent;
   width: 100%;
   color: ${({ theme }) => theme.text};
+
+
+  &:focus {
+    border-color: ${({ theme }) => theme.text}; // Change this to your desired color
+    outline: none;
+  }
 `;
 
 const Button = styled.button`
@@ -87,11 +103,29 @@ const More = styled.div`
 `;
 
 const Links = styled.div`
-  margin-left: 50px;
+
+justify-content: space-between;
+align-items: center;
+margin-right: -150px;
+
+@media (max-width: 768px) {
+  
+  margin-left: 10px;
+  margin-right: 0px;
+
+  }
 `;
 
 const Link = styled.span`
-  margin-left: 30px;
+  justify-content: space-between;
+  margin-left: 20px;
+  align-items: center;
+  @media (max-width: 768px) {
+    
+
+
+
+  }
   
 `;
 

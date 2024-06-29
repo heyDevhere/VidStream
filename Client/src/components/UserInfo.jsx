@@ -12,8 +12,10 @@ const Container = styled.div`
   justify-content: space-between;
   flex-wrap: wrap;
   margin-left: ${(props) => (props.menuOpen ? '290px' : '0px')}; 
-  margin-top: 55px;
-
+  margin-top: 5px;
+  @media (max-width: 768px) {
+    margin-top: 50px;
+  }
 
 `;
 
@@ -22,6 +24,10 @@ const Title = styled.h2`
   color: ${({ theme }) => theme.text};
   margin-bottom: 15px;
   margin-left: ${({ menuOpen }) => (menuOpen ? '20px' : '0')}; /* Adjust margin-left conditionally */
+  margin-top: 55px;
+  @media (max-width: 768px) {
+    margin-top: 50px;
+  }
 
 `;
 

@@ -64,7 +64,7 @@ const Container = styled.div`
       menuOpen ? "translateX(0)" : "translateX(-100%)"};
     opacity: ${({ menuOpen }) => (menuOpen ? 1 : 0)};
     pointer-events: ${({ menuOpen }) => (menuOpen ? "auto" : "none")};
-    z-index: 1000;
+    z-index: 1000000000000;
   }
 
   ::-webkit-scrollbar {

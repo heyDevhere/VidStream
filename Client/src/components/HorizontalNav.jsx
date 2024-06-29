@@ -23,7 +23,7 @@ const NavContainer = styled.div`
 
   @media (max-width: 768px) {
     margin-left: ${({ menuOpen }) => (menuOpen ? "150px" : "0px")};
-    z-index: 100000;
+    z-index: 999;
     margin-bottom: 112px;
   }
 `;
@@ -50,20 +50,24 @@ const NavItem = styled(Link)`
   transition: background-color 0.3s, color 0.3s;
 
   &:last-child {
-    margin-right: ${({ menuOpen }) => (menuOpen ? "10px" : "20px")};
+    margin-right: ${({ menuOpen }) => (menuOpen ? "10px" : "30px")};
+    @media (max-width: 768px) {
+      margin-right: ${({ menuOpen }) => (menuOpen ? "0px" : "0px")};
+    }
   }
 
   &:first-child {
-    margin-left: 20px;
+    margin-left: ${({ menuOpen }) => (menuOpen ? "10px" : "30px")};
+    @media (max-width: 768px) {
+      margin-left: ${({ menuOpen }) => (menuOpen ? "0px" : "0px")};
+    }
   }
 
   &:hover {
     background-color: ${({ theme }) => theme.bgLighter};
   }
 
-
   @media (max-width: 768px) {
-    
     margin-bottom: 12px;
   }
 `;

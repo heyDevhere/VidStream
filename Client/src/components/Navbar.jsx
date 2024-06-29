@@ -64,10 +64,11 @@ const Search = styled.div`
   justify-content: center;
   width: 300px;
   margin: 0 auto;
+  position: relative;
 
   @media (max-width: 768px) {
     width: 50%;
-    margin: 10px auto;
+    left:9px;
   }
 `;
 
@@ -80,6 +81,7 @@ const SearchContainer = styled.div`
   border-radius: 25px;
   padding: 5px 10px;
   border: ${({ isFocused, theme }) => (isFocused ? `2px solid ${theme.text}` : 'none')}; // Conditional border
+  margin:auto;
 
 `;
 
@@ -94,7 +96,7 @@ const Input = styled.input`
   
 
   @media (max-width: 768px) {
-    width: 50%;
+    width: 48px;
   }
 `;
 
@@ -170,6 +172,8 @@ const Notifiy = styled.div`
     /* align-items: flex-end; */
     /* left:240px; */
     margin-right: ${({ currentUser }) => (currentUser ? "80px" : "10px")};
+    z-index: 4000;
+
   }
 `;
 

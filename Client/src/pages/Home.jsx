@@ -15,7 +15,9 @@ const Container = styled.div`
   @media (max-width: 768px) {
     flex-direction: column;
     align-items: center; 
-    padding-right: 0;
+    padding-right: 0; 
+    margin-top: 40px;
+  
   }
 `;
 

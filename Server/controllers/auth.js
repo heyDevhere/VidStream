@@ -42,8 +42,8 @@ export const signin = async (req, res, next) => {
     res.cookie('access_token', token, {
       expires: new Date(Date.now() + 25892000000), // Adjust expiry time as needed
       httpOnly: true,
-      secure: true, // Should be true in production
-      sameSite: 'none' // Use 'None' if dealing with cross-domain requests
+      secure: false, // Should be true in production
+      sameSite: 'lax' // Use 'None' if dealing with cross-domain requests
     }).status(200).json(others)
 
 
