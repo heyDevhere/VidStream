@@ -429,6 +429,7 @@ const Video = () => {
   };
 
   const handleLike = async () => {
+    if (currentUser) {
     await axios.put(
       `https://vidstream-mfy7.onrender.com/api/users/like/${currentVideo._id}`,
       {},
@@ -438,9 +439,14 @@ const Video = () => {
     );
 
     dispatch(like(currentUser._id));
+   }
+   else{
+     toast.error("Login First!");
+   }
   };
 
   const handleDislike = async () => {
+    if (currentUser) {
     await axios.put(
       `https://vidstream-mfy7.onrender.com/api/users/dislike/${currentVideo._id}`,
       {},
@@ -450,6 +456,10 @@ const Video = () => {
     );
 
     dispatch(dislike(currentUser._id));
+   }
+   else{
+     toast.error("Login First!");
+   }
   };
 
   return (
@@ -466,23 +476,24 @@ const Video = () => {
           <Buttons>
             <LikeButton>
               <Button onClick={handleLike}>
-                {currentVideo.likes?.includes(currentUser?._id) ? (
+                {currentVideo &&
+                currentVideo.likes?.includes(currentUser?._id) ? (
                   <ThumbUpIcon />
                 ) : (
                   <ThumbUpOutlinedIcon />
                 )}{" "}
-                {currentVideo.likes?.length}
+                {currentVideo?.likes?.length ?? video.likes?.length}
               </Button>
             </LikeButton>
 
             <DislikeButton>
               <Button onClick={handleDislike}>
-                {currentVideo.dislikes?.includes(currentUser?._id) ? (
+              {currentVideo && currentVideo.dislikes?.includes(currentUser?._id) ? (
                   <ThumbDownIcon />
                 ) : (
                   <ThumbDownOffAltOutlinedIcon />
                 )}{" "}
-                {currentVideo.dislikes?.length}
+                {currentVideo?.dislikes?.length ?? video.dislikes?.length}
                 </Button>
             </DislikeButton>
             <Button>
